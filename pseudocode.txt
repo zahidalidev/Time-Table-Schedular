@@ -18,16 +18,15 @@ generateTimetable ()
 				if (fit(currentCourse, i, j))
       
 					for(m = 1 to crHours[cr])
-				 	timeTable[i][ j] = currentCourse
-					classRooms[cl][j] = 1
-					j++
-
-                          	 else
+					   timeTable[i][ j] = currentCourse
+					   classRooms[cl][j] = 1
+					   j++
+                                        currentCourse.crHours.removeIndex(cr)   //removing index of crHours array
+                          	else
 		        		y++
 					if (y <=  totalCourse)
 					currentCourse = courses[y]
-		cr++
-
+		
             print (timeTable)                             
             for(i = 1 to daysPerWeek )
       	         for(j = 1 to hoursPerDay)
