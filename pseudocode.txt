@@ -1,1 +1,28 @@
 
+generateTimetable ()
+      for(cl = 1 to totalRooms)
+           for(cls = 1 to classes)
+
+	          for i = 1 to daysPerWeek  //5
+		          y = 1
+	            currentCourse = courses[y]
+	
+                cr = 1
+                j = 1
+	              While j <=  hoursPerDay //8
+                    crHours[] = currcurrentCourse.crHours
+ 
+                    if(timeTable[i][j] == 0 and classRooms[cl][j] == 0)
+
+                      if (fit(currentCourse, i, j))
+
+                           fot(m = 1 to crHours[cr])
+                           timeTable[i][ j] = currentCourse
+                           classRooms[cl][j] = 1
+                           j++
+
+                      else
+                      y++
+                      if (y <=  totalCourse)
+                      currentCourse = courses[y]
+                      Cr++
