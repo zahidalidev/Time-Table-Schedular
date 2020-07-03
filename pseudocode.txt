@@ -39,12 +39,13 @@ generateTimetable ()
 			
 			if(timeTable[i][j] == 0 and classRooms[cl][j] == 0)
  			 
-				if (fit(currentCourse, i, j))
+				if (checkCourse(currentCourse, i, j, teacher))
       
 					for(m = 1 to crHours[cr])
 					   timeTable[i][ j] = currentCourse
 					   classRooms[cl][j] = 1
 					   j++
+					   teacher.hours--
                                         currentCourse.crHours.removeIndex(cr)   //removing index of crHours array
                           	else
 		        		y++
