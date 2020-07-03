@@ -1,3 +1,10 @@
+
+checkTeacher(course, teacher, i, j) 
+   if(teacher[i][j].course == course)
+      if(teacher[i][j].hours != 0)
+         return true
+   return false
+
 checkCourse (course, i, j, teacher) 
 	count = 0
 
