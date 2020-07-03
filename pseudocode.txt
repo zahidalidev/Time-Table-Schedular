@@ -1,3 +1,20 @@
+checkCourse (course, i, j, teacher) 
+	count = 0
+
+	if (course.crHours == 3 and j >=  6)
+		count++
+
+    	if (course.crHours == 2 and j >=  7)
+		count++
+
+	if (checkTeacher(course, teacher, i, j)
+		count++
+    
+    	if (count == 3)
+		return TRUE
+
+	return FALSE
+
 generateTimetable ()
     for(tc = 1 to totalRooms)
     for(hpd = 1 to hoursPerDay)
