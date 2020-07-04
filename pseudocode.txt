@@ -6,53 +6,52 @@ checkTeacher(course, teacher, i, j)
    return false
 
 checkCourse (course, i, j, teacher) 
-	count = 0
 
-	if (course.crHours == 3 and j >=  6)
-		count++
+   if (course.crHours == 3 and j >=  6)
+      count++
 
-    	if (course.crHours == 2 and j >=  7)
-		count++
+   if (course.crHours == 2 and j >=  7)
+      count++
 
-	if (checkTeacher(course, teacher, i, j)
-		count++
+   if (checkTeacher(course, teacher, i, j)
+      count++
     
-    	if (count == 3)
-		return TRUE
+   if (count == 3)
+      return TRUE
 
-	return FALSE
+   return FALSE
 
 generateTimetable ()
-    for(tc = 1 to totalRooms)
-    for(hpd = 1 to hoursPerDay)
-        	classRooms[tc][hpd] = 0
+   for(tc = 1 to totalRooms)
+       for(hpd = 1 to hoursPerDay)
+           classRooms[tc][hpd] = 0
 
-    for(cl = 1 to totalRooms)
-        for(cls = 1 to classes)
-	     for i = 1 to daysPerWeek  //5
-	    	y = 1
-        	currentCourse = courses[y]
-              	cr = 1
-                j = 1
-	 	While j <=  hoursPerDay //8 (e.g., 8AM-4PM)
-                	crHours[] = currcurrentCourse.crHours
+   for(cl = 1 to totalRooms)
+       for(cls = 1 to classes)
+	   for i = 1 to daysPerWeek  //5
+	       y = 1
+               currentCourse = courses[y]
+               cr = 1
+               j = 1
+	       While j <=  hoursPerDay //8 (e.g., 8AM-4PM)
+                    crHours[] = currentCourse.crHours
 			
-			if(timeTable[i][j] == 0 and classRooms[cl][j] == 0)
+		    if(timeTable[i][j] == 0 and classRooms[cl][j] == 0)
  			 
-				if (checkCourse(currentCourse, i, j, teacher))
+			if (checkCourse(currentCourse, i, j, teacher))
       
-					for(m = 1 to crHours[cr])
-					   timeTable[i][ j] = currentCourse
-					   classRooms[cl][j] = 1
-					   j++
-					   teacher.hours--
-                                        currentCourse.crHours.removeIndex(cr)   //removing index of crHours array
-                          	else
-		        		y++
-					if (y <=  totalCourse)
-					currentCourse = courses[y]
+			     for(m = 1 to crHours[cr])
+				 timeTable[i][ j] = currentCourse
+				 classRooms[cl][j] = 1
+				 j++
+				 teacher[i][j].hours = 0
+			     currentCourse.crHours.removeIndex(cr)   //removing index of crHours array
+			else
+			     y++
+			     if (y <=  totalCourse)
+			         currentCourse = courses[y]
 		
-            print (timeTable)                             
-            for(i = 1 to daysPerWeek )
-      	         for(j = 1 to hoursPerDay)
-            	     timeTable[i][j] = 0
+           print (timeTable)                             
+           for(i = 1 to daysPerWeek )
+      	       for(j = 1 to hoursPerDay)
+            	   timeTable[i][j] = 0
