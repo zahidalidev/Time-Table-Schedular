@@ -28,6 +28,7 @@ generateTimetable ()
 
    for(cl = 1 to totalRooms)
        for(cls = 1 to classes)
+           currentClass = classes[cls]  
 	   for i = 1 to daysPerWeek  //5
 	       y = 1
                currentCourse = courses[y]
@@ -36,14 +37,14 @@ generateTimetable ()
 	       While j <=  hoursPerDay //8 (e.g., 8AM-4PM)
                     crHours[] = currentCourse.crHours
 			
-		    if(timeTable[i][j] == 0 and classRooms[cl][j] == 0 and class[i][j] == 0)
+		    if(timeTable[i][j] == 0 and classRooms[cl][j] == 0 and currentClass[i][j] == 0)
  			 
 			if (checkCourse(currentCourse, i, j, teacher))
       
 			     for(m = 1 to crHours[cr])
 				 timeTable[i][ j] = currentCourse
 				 classRooms[cl][j] = 1
-				 class[i][j] = 1
+				 currentClass[i][j] = 1
 				 j++
 				 teacher[i][j].hours = 0
 			     currentCourse.crHours.removeIndex(cr)   //removing index of crHours array
