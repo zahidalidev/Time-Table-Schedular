@@ -1,0 +1,14 @@
+{
+  "name": "autotimetable",
+  "version": "1.0.0",
+  "description": "automatic time table generator ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "console.table": "^0.10.0"
+  }
+}
