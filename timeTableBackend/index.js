@@ -1,5 +1,58 @@
 const cTable = require('console.table');
 
+checkTeacher = (currentCourse, i, j, cr) => {
+
+    if((currentCourse.crHouurs[cr] == 0) || currentCourse.crHouurs.length == 0){
+        return [false];
+    }
+
+    for(let t = 0; t < teachers.length; t++){
+        
+        if(currentCourse.teacher === teachers[t][0]){
+            let tHour = j;
+            for(let l = 0; l < currentCourse.crHouurs[cr]; l++){
+
+                if(teachers[t][1][i][tHour] == 0){
+                    tHour++;
+                }else{
+                    return [false];
+                }
+                if(l == currentCourse.crHouurs[cr] - 1){
+                    return [true, t];
+                }
+            }
+        }
+    }
+}
+
+checkCourse = (currentCourse, i, j, cr, cls) => {
+    let count = 0;
+
+    if (currentCourse.crHouurs[cr] == 3 && j >=  6){
+        count--;
+    }
+
+    if (currentCourse.crHouurs[cr] == 2 && j >=  7){
+        count--;
+    }
+
+    if(classes[cls][0] == currentCourse.session){
+        count++;
+    }
+
+    let chTeacher = checkTeacher(currentCourse, i, j, cr);
+    if (chTeacher[0]){
+        count++;
+    }
+
+    if (count == 2)
+        return chTeacher;
+
+    return [false];
+}
+
+
+
 
 generateTimeTable = () => {
     let cl = 0;
