@@ -8,7 +8,7 @@ checkTeacher = (currentCourse, i, j, cr) => {
 
     for(let t = 0; t < teachers.length; t++){
         
-        if(currentCourse.teacher === teachers[t][0]){
+        if(currentCourse.teacher == teachers[t][0]){
             let tHour = j;
             for(let l = 0; l < currentCourse.crHouurs[cr]; l++){
 
@@ -18,7 +18,7 @@ checkTeacher = (currentCourse, i, j, cr) => {
                     return [false];
                 }
                 if(l == currentCourse.crHouurs[cr] - 1){
-                    return [true, t];
+                    return [true];
                 }
             }
         }
