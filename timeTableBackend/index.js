@@ -1,14 +1,18 @@
 const cTable = require('console.table');
 
+let daysPerWeek = timeTable.length;
+let hoursPerDay = timeTable[0].length;
+
 checkTeacher = (currentCourse, i, j, cr) => {
 
     if((currentCourse.crHouurs[cr] == 0) || currentCourse.crHouurs.length == 0){
         return [false];
+        // return [true, 1];
     }
 
     for(let t = 0; t < teachers.length; t++){
         
-        if(currentCourse.teacher == teachers[t][0]){
+        if(currentCourse.teacher === teachers[t][0]){
             let tHour = j;
             for(let l = 0; l < currentCourse.crHouurs[cr]; l++){
 
@@ -16,9 +20,10 @@ checkTeacher = (currentCourse, i, j, cr) => {
                     tHour++;
                 }else{
                     return [false];
+                    // return [true, t];
                 }
                 if(l == currentCourse.crHouurs[cr] - 1){
-                    return [true];
+                    return [true, t];
                 }
             }
         }
@@ -56,7 +61,7 @@ checkCourse = (currentCourse, i, j, cr, cls) => {
 
 generateTimeTable = () => {
     let cl = 0;
-    while(cl < classRooms.length){
+    while(cl < classRooms.length ){
         
         for(let cls = 0; cls < classes.length; cls++){
             
@@ -65,9 +70,15 @@ generateTimeTable = () => {
                 let y = 0;
                 let j = 1;
 
-                while(j < hoursPerDay - 1){
-                    if((timeTable[i][j] == 0) && (classRooms[cl][1][i][j] == 0))) {
-                    
+                while(j < hoursPerDay && j <= courses.length){
+
+                    if((timeTable[i][j] == 0) && (classRooms[cl][1][i][j] == 0) && (classes[cls][1][i][j] == 0)) {
+
+                        if(y >= courses.length){
+                            y = 0;
+                            j++;
+                        }
+                        
                         if (checkCourse(courses[y], i, j, 0, cls)){
                             
                             for(let m = 0; m < courses[y].crHouurs[0]; m++){
