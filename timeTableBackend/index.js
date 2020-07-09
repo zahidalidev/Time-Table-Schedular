@@ -109,8 +109,15 @@ generateTimeTable = () => {
                     }
                 }
             }
+            
             console.log('\nClass: ', classes[cls][0]," Room: ", classRooms[cl][0], "\n\n")
-            console.table(timeTable);                             
+            console.table(timeTable);   
+            
+            var table = []; 
+            for (var k = 0; k < timeTable.length; k++) {
+                table[k] = timeTable[k].slice();    //to copy array by value
+            }
+            
             for(let o = 0; o < daysPerWeek; o++ ){
                 for(p = 1; p < hoursPerDay; p++){
                     timeTable[o][p] = 0;
