@@ -58,7 +58,6 @@ checkCourse = (currentCourse, i, j, cr, cls) => {
 
 
 
-
 generateTimeTable = () => {
     let cl = 0;
     while(cl < classRooms.length ){
@@ -78,14 +77,14 @@ generateTimeTable = () => {
                             y = 0;
                             j++;
                         }
-                        
+
                         let chCourse = checkCourse(courses[y], i, j, 0, cls);
                         
                         if (chCourse[0]){
-                            
+
                             for(let m = 0; m < courses[y].crHouurs[0]; m++){
 
-                                 timeTable[i][j] = courses[y].name + '/' + courses[y].teacher;
+                                timeTable[i][j] = courses[y].name + '/' + courses[y].teacher;
                                 classRooms[cl][1][i][j] = 1;
                                 classes[cls][1][i][j] = 1;
                                 teachers[chCourse[1]][1][i][j] = 1;
@@ -105,9 +104,12 @@ generateTimeTable = () => {
                             y++;
                         }
 
+                    }else{
+                        j++;
                     }
                 }
             }
+            console.log('\nClass: ', classes[cls][0]," Room: ", classRooms[cl][0], "\n\n")
             console.table(timeTable);                             
             for(let o = 0; o < daysPerWeek; o++ ){
                 for(p = 1; p < hoursPerDay; p++){
@@ -116,6 +118,7 @@ generateTimeTable = () => {
             }
         }
         cl++;
+        
     }
 }
 
