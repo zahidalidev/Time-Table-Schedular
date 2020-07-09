@@ -85,9 +85,11 @@ generateTimeTable = () => {
                             
                             for(let m = 0; m < courses[y].crHouurs[0]; m++){
 
-                                timeTable[i][j] = courses[y].name + '/' + courses[y].teacher;
+                                 timeTable[i][j] = courses[y].name + '/' + courses[y].teacher;
                                 classRooms[cl][1][i][j] = 1;
-                                classes[i][j] = 1;
+                                classes[cls][1][i][j] = 1;
+                                teachers[chCourse[1]][1][i][j] = 1;
+                                j++
 
                             }
                             courses[y].crHouurs.splice(0, 1);         //removing credit used credit hours
