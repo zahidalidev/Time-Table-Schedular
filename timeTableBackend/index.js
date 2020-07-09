@@ -79,12 +79,14 @@ generateTimeTable = () => {
                             j++;
                         }
                         
-                        if (checkCourse(courses[y], i, j, 0, cls)){
+                        let chCourse = checkCourse(courses[y], i, j, 0, cls);
+                        
+                        if (chCourse[0]){
                             
                             for(let m = 0; m < courses[y].crHouurs[0]; m++){
 
-                                timeTable[i][j] = courses[y].name;
-                                classRooms[i][j] = 1;
+                                timeTable[i][j] = courses[y].name + '/' + courses[y].teacher;
+                                classRooms[cl][1][i][j] = 1;
                                 classes[i][j] = 1;
 
                             }
