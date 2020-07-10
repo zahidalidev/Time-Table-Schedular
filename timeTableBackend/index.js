@@ -61,31 +61,24 @@ let classes = [
     ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
     ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
 ]],
-//     ["session_17", [
-//     ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
-//     ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0],
-//     ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0],
-//     ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
-//     ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
-// ]],
-//     ["session_16", [
-//     ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
-//     ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0],
-//     ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0],
-//     ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
-//     ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
-// ]],
+    ["session_17", [
+    ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
+    ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0],
+    ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0],
+    ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
+    ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
+]],
+    ["session_16", [
+    ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
+    ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0],
+    ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0],
+    ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
+    ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
+]],
 ];
 
 
 let courses = [
-    {name: 'c1', session: 'session_18', teacher: 't1', crHouurs: [1, 2]},
-    {name: 'c2', session: 'session_18', teacher: 't4', crHouurs: [1, 1, 1]},
-    {name: 'c3', session: 'session_18', teacher: 't1', crHouurs: [3]},
-    {name: 'c4', session: 'session_18', teacher: 't5', crHouurs: [2]},
-    {name: 'c5', session: 'session_18', teacher: 't2', crHouurs: [2, 1]},
-    {name: 'c6', session: 'session_18', teacher: 't2', crHouurs: [2]},
-    {name: 'c7', session: 'session_18', teacher: 't6', crHouurs: [1, 1, 1]},
     {name: 'c8', session: 'session_19', teacher: 't2', crHouurs: [3]},
     {name: 'c9', session: 'session_19', teacher: 't2', crHouurs: [3]},
     {name: 'c10', session: 'session_19', teacher: 't3', crHouurs: [1, 2]},
@@ -95,26 +88,34 @@ let courses = [
     {name: 'c14', session: 'session_19', teacher: 't3', crHouurs: [1, 1, 1]},
     {name: 'c15', session: 'session_19', teacher: 't4', crHouurs: [1, 1, 1]},
     {name: 'c16', session: 'session_19', teacher: 't4', crHouurs: [1, 1, 1]},
+
+    {name: 'c1', session: 'session_18', teacher: 't1', crHouurs: [1, 2]},
+    {name: 'c2', session: 'session_18', teacher: 't4', crHouurs: [1, 1, 1]},
+    {name: 'c3', session: 'session_18', teacher: 't1', crHouurs: [3]},
+    {name: 'c4', session: 'session_18', teacher: 't5', crHouurs: [2]},
+    {name: 'c5', session: 'session_18', teacher: 't2', crHouurs: [2, 1]},
+    {name: 'c6', session: 'session_18', teacher: 't2', crHouurs: [2]},
+    {name: 'c7', session: 'session_18', teacher: 't6', crHouurs: [1, 1, 1]},
     {name: 'c17', session: 'session_18', teacher: 't4', crHouurs: [1, 1, 1]},
     {name: 'c18', session: 'session_18', teacher: 't5', crHouurs: [2, 1]},
     {name: 'c19', session: 'session_18', teacher: 't5', crHouurs: [1, 2]},
     {name: 'c20', session: 'session_18', teacher: 't6', crHouurs: [1, 2]},
     
-    // {name: 'c21', session: 'session_17', teacher: 't3', crHouurs: [1, 1, 1]},
-    // {name: 'c22', session: 'session_17', teacher: 't4', crHouurs: [1, 1, 1]},
-    // {name: 'c23', session: 'session_17', teacher: 't4', crHouurs: [1, 1, 1]},
-    // {name: 'c24', session: 'session_17', teacher: 't4', crHouurs: [1, 1, 1]},
-    // {name: 'c25', session: 'session_17', teacher: 't5', crHouurs: [2, 1]},
-    // {name: 'c26', session: 'session_17', teacher: 't5', crHouurs: [1, 2]},
-    // {name: 'c27', session: 'session_17', teacher: 't6', crHouurs: [1, 2]},
+    {name: 'c21', session: 'session_17', teacher: 't3', crHouurs: [1, 1, 1]},
+    {name: 'c22', session: 'session_17', teacher: 't4', crHouurs: [1, 1, 1]},
+    {name: 'c23', session: 'session_17', teacher: 't4', crHouurs: [1, 1, 1]},
+    {name: 'c24', session: 'session_17', teacher: 't4', crHouurs: [1, 1, 1]},
+    {name: 'c25', session: 'session_17', teacher: 't5', crHouurs: [2, 1]},
+    {name: 'c26', session: 'session_17', teacher: 't5', crHouurs: [1, 2]},
+    {name: 'c27', session: 'session_17', teacher: 't6', crHouurs: [1, 2]},
     
-    // {name: 'c28', session: 'session_16', teacher: 't3', crHouurs: [1, 1, 1]},
-    // {name: 'c29', session: 'session_16', teacher: 't4', crHouurs: [1, 1, 1]},
-    // {name: 'c30', session: 'session_16', teacher: 't4', crHouurs: [1, 1, 1]},
-    // {name: 'c31', session: 'session_16', teacher: 't4', crHouurs: [1, 1, 1]},
-    // {name: 'c32', session: 'session_16', teacher: 't5', crHouurs: [2, 1]},
-    // {name: 'c33', session: 'session_16', teacher: 't5', crHouurs: [1, 2]},
-    // {name: 'c34', session: 'session_16', teacher: 't6', crHouurs: [1, 2]},
+    {name: 'c28', session: 'session_16', teacher: 't3', crHouurs: [1, 1, 1]},
+    {name: 'c29', session: 'session_16', teacher: 't4', crHouurs: [1, 1, 1]},
+    {name: 'c30', session: 'session_16', teacher: 't4', crHouurs: [1, 1, 1]},
+    {name: 'c31', session: 'session_16', teacher: 't4', crHouurs: [1, 1, 1]},
+    {name: 'c32', session: 'session_16', teacher: 't5', crHouurs: [2, 1]},
+    {name: 'c33', session: 'session_16', teacher: 't5', crHouurs: [1, 2]},
+    {name: 'c34', session: 'session_16', teacher: 't6', crHouurs: [1, 2]},
 
 ];
 
@@ -278,7 +279,8 @@ generateTimeTable = () => {
             for (var k = 0; k < timeTable.length; k++) {
                 table[k] = timeTable[k].slice();    //to copy array by value
             }
-
+            // console.log(classes[cls][0], classRooms[cl][0])
+            // console.table(table)
             //sessions(class) wise table 
             for(let ta = 0; ta < allTables.length || allTables.length == 0; ta++){
                 if(allTables.length != 0){
@@ -291,14 +293,24 @@ generateTimeTable = () => {
                                 if((allTables[ta][2][dpw][hpd] == 0) && (table[dpw][hpd] != 0)){
                                     allTables[ta][2][dpw][hpd] = table[dpw][hpd];
                                 }
+
                             }
                         }
 
                     }else if(allTables[ta][1] == classRooms[cl][0]){
-                        allTables.push([classes[cls][0], classRooms[cl][0], table]);    
+                        let count = 0;
+                        for(let s = 0; s < allTables.length; s++){
+                            if(allTables[s][0] == classes[cls][0]){
+                                count++;
+                            }
+                        }
+                        if(count == 0){
+                            allTables.push([classes[cls][0], classRooms[cl][0], table]);    
+                        }
                     }
 
                 }else{
+                    
                     allTables.push([classes[cls][0], classRooms[cl][0], table]);    
                 }
             }
@@ -327,5 +339,3 @@ finalTables = () => {
 }
 
 finalTables();
-
-// console.log(courses)
