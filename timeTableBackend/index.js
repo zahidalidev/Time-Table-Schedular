@@ -84,7 +84,7 @@ generateTimeTable = () => {
 
                             for(let m = 0; m < courses[y].crHouurs[0]; m++){
 
-                                timeTable[i][j] = courses[y].name + '/' + courses[y].teacher;
+                                timeTable[i][j] = courses[y].name + ', ' + courses[y].teacher + ', ' + classRooms[cl][0];
                                 classRooms[cl][1][i][j] = 1;
                                 classes[cls][1][i][j] = 1;
                                 teachers[chCourse[1]][1][i][j] = 1;
@@ -109,15 +109,37 @@ generateTimeTable = () => {
                     }
                 }
             }
-            
-            console.log('\nClass: ', classes[cls][0]," Room: ", classRooms[cl][0], "\n\n")
-            console.table(timeTable);   
-            
+           
             var table = []; 
             for (var k = 0; k < timeTable.length; k++) {
                 table[k] = timeTable[k].slice();    //to copy array by value
             }
-            
+
+            //sessions(class) wise table 
+            for(let ta = 0; ta < allTables.length || allTables.length == 0; ta++){
+                if(allTables.length != 0){
+                    
+                    if(classes[cls][0] == allTables[ta][0]){
+
+                        for(let dpw = 0; dpw < daysPerWeek; dpw++){
+                            for(let hpd = 1; hpd < hoursPerDay; hpd++){
+                                
+                                if((allTables[ta][2][dpw][hpd] == 0) && (table[dpw][hpd] != 0)){
+                                    allTables[ta][2][dpw][hpd] = table[dpw][hpd];
+                                }
+                            }
+                        }
+
+                    }else if(allTables[ta][1] == classRooms[cl][0]){
+                        allTables.push([classes[cls][0], classRooms[cl][0], table]);    
+                    }
+
+                }else{
+                    allTables.push([classes[cls][0], classRooms[cl][0], table]);    
+                }
+            }
+
+            //freeing timrTable for furthor use
             for(let o = 0; o < daysPerWeek; o++ ){
                 for(p = 1; p < hoursPerDay; p++){
                     timeTable[o][p] = 0;
@@ -129,4 +151,15 @@ generateTimeTable = () => {
     }
 }
 
-generateTimeTable();
+
+finalTables = () => {
+    generateTimeTable();
+
+    for(let ta = 0; ta < allTables.length; ta++){
+        console.table(allTables[ta][0])
+        console.table(allTables[ta][2])
+    }
+
+}
+
+finalTables();
