@@ -2,169 +2,30 @@ const cTable = require('console.table');
 const express = require('express');
 const router = express.Router();
 
-let timeTable = [
-    ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
-];
+let timeTable = [[],[],[],[],[]];
 
 let classRooms = [
-    ["class_1", [
-    ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
-]],
-    ["class_2", [
-    ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
-]],
-    ["class_3", [
-    ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
-]],
-    ["class_4", [
-    ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
-]],
-    ["class_5", [
-    ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
-]],
+    [[[],[],[],[],[],]],
+    [[[],[],[],[],[],]],
+    [[[],[],[],[],[],]],
+    [[[],[],[],[],[],]],
+    [[[],[],[],[],[],]]
 ];
 
-let classes = [
-    ["session_19", [
-    ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
-]],
-    ["session_18", [
-    ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
-]],
-    ["session_17", [
-    ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
-]],
-    ["session_16", [
-    ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
-    ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
-]],
+let classes = [[
+    [[],[],[],[],[],]],
+    [[[],[],[],[],[],]],
+    [[[],[],[],[],[],]],
+    [[[],[],[],[],[],]],
 ];
 
 
 let courses = [
-    {name: 'c8', session: 'session_19', teacher: 't2', crHouurs: [3]},
-    {name: 'c9', session: 'session_19', teacher: 't2', crHouurs: [3]},
-    {name: 'c10', session: 'session_19', teacher: 't3', crHouurs: [1, 2]},
-    {name: 'c11', session: 'session_19', teacher: 't4', crHouurs: [2, 1]},
-    {name: 'c12', session: 'session_19', teacher: 't3', crHouurs: [1, 1]},
-    {name: 'c13', session: 'session_19', teacher: 't6', crHouurs: [3]},
-    {name: 'c14', session: 'session_19', teacher: 't3', crHouurs: [1, 1, 1]},
-    {name: 'c15', session: 'session_19', teacher: 't4', crHouurs: [1, 1, 1]},
-    {name: 'c16', session: 'session_19', teacher: 't4', crHouurs: [1, 1, 1]},
-
-    {name: 'c1', session: 'session_18', teacher: 't1', crHouurs: [1, 2]},
-    {name: 'c2', session: 'session_18', teacher: 't4', crHouurs: [1, 1, 1]},
-    {name: 'c3', session: 'session_18', teacher: 't1', crHouurs: [3]},
-    {name: 'c4', session: 'session_18', teacher: 't5', crHouurs: [2]},
-    {name: 'c5', session: 'session_18', teacher: 't2', crHouurs: [2, 1]},
-    {name: 'c6', session: 'session_18', teacher: 't2', crHouurs: [2]},
-    {name: 'c7', session: 'session_18', teacher: 't6', crHouurs: [1, 1, 1]},
-    {name: 'c17', session: 'session_18', teacher: 't4', crHouurs: [1, 1, 1]},
-    {name: 'c18', session: 'session_18', teacher: 't5', crHouurs: [2, 1]},
-    {name: 'c19', session: 'session_18', teacher: 't5', crHouurs: [1, 2]},
-    {name: 'c20', session: 'session_18', teacher: 't6', crHouurs: [1, 2]},
-    
-    {name: 'c21', session: 'session_17', teacher: 't3', crHouurs: [1, 1, 1]},
-    {name: 'c22', session: 'session_17', teacher: 't4', crHouurs: [1, 1, 1]},
-    {name: 'c23', session: 'session_17', teacher: 't4', crHouurs: [1, 1, 1]},
-    {name: 'c24', session: 'session_17', teacher: 't4', crHouurs: [1, 1, 1]},
-    {name: 'c25', session: 'session_17', teacher: 't5', crHouurs: [2, 1]},
-    {name: 'c26', session: 'session_17', teacher: 't5', crHouurs: [1, 2]},
-    {name: 'c27', session: 'session_17', teacher: 't6', crHouurs: [1, 2]},
-    
-    {name: 'c28', session: 'session_16', teacher: 't3', crHouurs: [1, 1, 1]},
-    {name: 'c29', session: 'session_16', teacher: 't4', crHouurs: [1, 1, 1]},
-    {name: 'c30', session: 'session_16', teacher: 't4', crHouurs: [1, 1, 1]},
-    {name: 'c31', session: 'session_16', teacher: 't4', crHouurs: [1, 1, 1]},
-    {name: 'c32', session: 'session_16', teacher: 't5', crHouurs: [2, 1]},
-    {name: 'c33', session: 'session_16', teacher: 't5', crHouurs: [1, 2]},
-    {name: 'c34', session: 'session_16', teacher: 't6', crHouurs: [1, 2]},
+    {name: '', session: '', teacher: '', crHouurs: []},
 
 ];
 
-let teachers = [
-    ["t1", [
-    ["Monday", 0, 0, 0, 1, 1, 1, 1, 1],
-    ["Tuesday", 1, 0, 0, 1, 1, 0, 0, 1],
-    ["Wednesday", 0, 0, 1, 1, 0, 1, 1, 1],
-    ["Thursday", 1, 0, 0, 1, 1, 0, 0, 1],
-    ["Friday", 0, 0, 0, 1, 1, 1, 1, 1],
-]],
-    ["t2", [
-    ["Monday", 1, 1, 1, 0, 0, 1, 1, 1],
-    ["Tuesday", 0, 1, 1, 0, 0, 1, 1, 0],
-    ["Wednesday", 1, 1, 0, 0, 1, 0, 0, 1],
-    ["Thursday", 0, 1, 1, 0, 0, 1, 1, 0],
-    ["Friday", 1, 1, 1, 0, 0, 1, 1, 1],
-]],
-    ["t3", [
-    ["Monday", 1, 1, 1, 1, 1, 0, 0, 0],
-    ["Tuesday", 1, 0, 0, 1, 1, 0, 0, 1],
-    ["Wednesday",0, 0, 1, 1, 0, 1, 1, 1],
-    ["Thursday", 1, 0, 0, 1, 1, 0, 0, 1],
-    ["Friday", 1, 1, 1, 1, 1, 0, 0, 0],
-]],
-    ["t4", [
-    ["Monday", 0, 0, 0, 1, 1, 1, 1, 1],
-    ["Tuesday", 0, 1, 1, 0, 0, 1, 1, 0],
-    ["Wednesday", 1, 1, 0, 0, 1, 0, 0, 1],
-    ["Thursday", 0, 1, 1, 0, 0, 1, 1, 0],
-    ["Friday", 0, 0, 0, 1, 1, 1, 1, 1],
-]],
-    ["t5", [
-    ["Monday", 1, 1, 1, 0, 0, 1, 1, 1],
-    ["Tuesday", 1, 0, 0, 1, 1, 0, 0, 1],
-    ["Wednesday", 0, 0, 1, 1, 0, 1, 1, 1],
-    ["Thursday", 1, 0, 0, 1, 1, 0, 0, 1],
-    ["Friday", 1, 1, 1, 0, 0, 1, 1, 1],
-]],
-    ["t6", [
-    ["Monday", 1, 1, 1, 1, 1, 0, 0, 0],
-    ["Tuesday", 0, 1, 1, 0, 0, 1, 1, 0],
-    ["Wednesday", 1, 1, 0, 0, 1, 0, 0, 1],
-    ["Thursday", 0, 1, 1, 0, 0, 1, 1, 0],
-    ["Friday", 1, 1, 1, 1, 1, 0, 0, 0],
-]],
-];
+let teachers = [[[[],[],[],[]]]];
 
 let daysPerWeek = timeTable.length;
 let hoursPerDay = timeTable[0].length;
@@ -331,6 +192,13 @@ generateTimeTable = () => {
 
 
 router.post('/', async(req, res) => {
+
+    timeTable = req.body.timeTable;
+    classRooms = req.body.classRooms;
+    classes = req.body.classes;
+    courses = req.body.courses;
+    teachers = req.body.teachers;
+    
     generateTimeTable();
 
     res.send(allTables);
