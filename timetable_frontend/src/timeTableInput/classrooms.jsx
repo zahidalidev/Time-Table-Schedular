@@ -51,6 +51,7 @@ class ClassRooms extends Component {
     handleSubmit = () => {
         const roomsArray = [];
         const rooms = [...this.state.rooms];
+        
         rooms.map(room => {
             let roomArray = [room.name, [
                 ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
@@ -65,11 +66,11 @@ class ClassRooms extends Component {
     }
 
     handleRemove = (i) => {
-        const rooms2 = [...this.state.rooms];
+        const rooms = [...this.state.rooms];
 
-        if(rooms2.length > 1){
-            rooms2.splice(i, 1);
-            this.setState({rooms: rooms2});
+        if(rooms.length > 1){
+            rooms.splice(i, 1);
+            this.setState({rooms});
         }else{
             alert("Enter the Name of Atleast one Room")
         }
@@ -125,7 +126,7 @@ class ClassRooms extends Component {
                                             label = {`Room-${i+1} Name`}
                                             variant = "outlined"
                                             id = "custom-css-outlined-input"
-                                            value = {rooms.name}
+                                            value = {room.name}
                                             onChange = {(e) => this.handleChange(e, i)}
                                             size="small"
                                             fullWidth

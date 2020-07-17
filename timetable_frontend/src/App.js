@@ -11,7 +11,7 @@ import Courses from "./timeTableInput/courses";
 class App extends Component {
 
   state = {
-    classRooms: []
+    classRooms: [],
   }
 
   handleClassRooms = (classRooms) => {
