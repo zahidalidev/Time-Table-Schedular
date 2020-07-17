@@ -19,7 +19,8 @@ class App extends Component {
     teachers: [],
     courses: [],
     sessionsName: [],
-    teachersName: []
+    teachersName: [],
+    generatedTimeTable: []
   }
 
   handleClassRooms = (classRooms) => {
@@ -56,12 +57,14 @@ class App extends Component {
       courses: this.state.courses,
       teachers: this.state.teachers
     }
+    console.log(data)
     const table = await generateTableWithPost(data);
+    this.setState({generatedTimeTable: table})
     console.log("table: ", table)
   }
   
   render(){
-    const {teachersName, sessionsName} = this.state;
+    const {teachersName, sessionsName, generatedTimeTable} = this.state;
 
     return (
       <div className="App">
@@ -72,7 +75,7 @@ class App extends Component {
           <Route path = "/home/classes" exact render={(props) => < Classes {...props} onClasses = {this.handleClasses} />} />
           <Route path = "/home/teachers" exact render = {(props) => <Teachers {...props} onHandleTeachers = {this.handleTeachers} />} />
           <Route path = "/home/courses" exact render = {(props) => <Courses {...props} onTeachersName = {teachersName} onSessionsName = {sessionsName} onCourses = {this.handelCourses} />} />
-          <Route path = "/home/table" exact render = {(props) => <TimeTable {...props} onGenerateTable = {this.generateTable} />} />
+          <Route path = "/home/table" exact render = {(props) => <TimeTable {...props} onGenerateTable = {this.generateTable} onGeneratedTimeTable = {generatedTimeTable} />} />
         </Switch>
       </div>
     );

@@ -202,9 +202,11 @@ router.post('/', async(req, res) => {
     classes = req.body.classes;
     courses = req.body.courses;
     teachers = req.body.teachers;
+    console.table(teachers);
     generateTimeTable();
-    console.table(allTables[2]);
+    console.table(teachers);
     res.send(allTables)
+    allTables = [];
 })
 
 module.exports = router;
