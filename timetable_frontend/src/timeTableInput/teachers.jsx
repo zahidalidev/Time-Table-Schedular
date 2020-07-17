@@ -8,6 +8,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
+import Divider from '@material-ui/core/Divider';
 
 const CssTextField = withStyles({
   root: {
@@ -49,7 +50,14 @@ class Teachers extends Component {
     }
 
     handleChange = (e, i, j, k) => {
-       console.log("e, i, j: ", e.target.value, i, j, k)
+        const teachers = [...this.state.teachers];
+        
+        if(k === undefined){
+            teachers[i][j] = e.target.value;
+        }else{
+            teachers[i][1][j][k] = e.target.value;
+        }
+        this.setState({teachers})
     }
 
     addMoreField = () => {
@@ -64,52 +72,63 @@ class Teachers extends Component {
     }
 
     handleSubmit = () => {
-       
+        this.props.onHandleTeachers(this.state.teachers);
     }
 
     handleRemove = (i) => {
-        
+        const teachers = [...this.state.teachers];
+        if(teachers.length > 1){
+            teachers.splice(i, 1);
+            this.setState({teachers});
+        }else{
+            alert("Add atleast one teacher!")
+        }
     }
 
 
 
-        
+    setMarginLeft = () => {
+        if(window.innerWidth <= 700){
+            this.setState({marginLeftTextField: 20})
+        }else{
+            this.setState({marginLeftTextField: 0})
+        }
+    }
+
     updateDimensions = (i) => {
         this.setState({ width: window.innerWidth, height: window.innerHeight });
         if(i === 1){
-            if(window.innerWidth <= 700) 
-                this.setState({marginLeftTextField: 20})
+            this.setMarginLeft();
         }
     };
     
     componentDidMount() {
 
         window.addEventListener('resize', () => this.updateDimensions(1));
-        if(window.innerWidth <= 700) 
-                this.setState({marginLeftTextField: 20})
+        this.setMarginLeft();
         
     }
     componentWillUnmount() {
         window.removeEventListener('resize', () => this.updateDimensions(0));
-        if(window.innerWidth <= 700) 
-                this.setState({marginLeftTextField: 20})
+        this.setMarginLeft();
         // console.log(this.state.width)
     }
     
 
     render(){
-        const { teachers } = this.state;
+        const { teachers, marginLeftTextField } = this.state;
+        const leftMargin = marginLeftTextField === 0 ? marginLeftTextField * -4 + 70 : 70;
 
         return (
             <form noValidate>
-                <Grid container row alignItems="center" item xs={12} style={{marginTop: 60}}>
+                <Grid container alignItems="center" item xs={12} style={{marginTop: 60, marginLeft: marginLeftTextField * 2}}>
                     {
                         teachers.map((teacher, i) => {
                             return (
-                                <Grid container key = {i} direction="column" justify="center" alignItems="center" item xs={9} style={{marginTop: 20, marginLeft: this.state.marginLeftTextField * -2}}>  
+                                <Grid container key = {i} direction="column" justify="center" alignItems="center" item xs={9} style={{marginTop: 50, marginLeft: marginLeftTextField }}>  
                                     <Grid container direction="row" justify="flex-end" alignItems="center" spacing={4} item sm={12}>                                    
-                                        <Grid container direction="row" justify="flex-end" alignItems="center" item xs={4} style={{paddingLeft: 70}}>
-                                            <Grid container direction="row" justify="flex-end" alignItems="center" item xs={4}>
+                                        <Grid container direction="row" justify="flex-end" alignItems="center" item xs={4} style={{paddingLeft: {leftMargin}, paddingRight: marginLeftTextField * -3}}>
+                                            <Grid container direction="row" justify="flex-end" alignItems="center" item xs={marginLeftTextField === 0 ? 4 : 1} >
                                                 <Button
                                                     variant="contained"
                                                     color="secondary"
@@ -119,20 +138,25 @@ class Teachers extends Component {
                                                     X
                                                 </Button>
                                             </Grid>
-                                            <Grid container direction="row" justify="flex-end" alignItems="center" item xs={8}>
+                                            <Grid container direction="row" justify="flex-end" alignItems="center" item xs={marginLeftTextField === 0 ? 8 : 11} >
                                                 <CssTextField
-                                                    label = {`Teacher-${i+1} Name`}
+                                                    label = {marginLeftTextField === 0 ? `Teacher-${i+1} Name` : null}
                                                     variant = "outlined"
                                                     id = "custom-css-outlined-input"
                                                     value = {teacher[0]}
-                                                    onChange = {(e) => this.handleChange(e, i)}
+                                                    onChange = {(e) => this.handleChange(e, i, 0)}
                                                     size="small"
+                                                    
                                                 />
+                                                {marginLeftTextField === 0 ? null : 
+                                                    <FormHelperText id="standard-weight-helper-text">Teacher-{i+1} Name</FormHelperText>
+                                                }
+                                                
                                             </Grid>
                                         </Grid>
                                         {teacher[1].map((week, j) => {
                                             return (
-                                                <Grid container key = {i} direction="row" justify="flex-end" alignItems="center" item xs={8}>
+                                                <Grid container key = {j} direction="row" justify="flex-end" alignItems="center" item xs={8}>
                                                     <p style={{marginRight: 20}} >{week[0]}</p>
                                                     <FormControl>
                                                         <Select
@@ -241,21 +265,19 @@ class Teachers extends Component {
                                                 </Grid>
                                             );
                                         })}
-
-
-
                                     </Grid>
+                                    <Divider style={{width: "80%", marginLeft: 120, marginTop: 30}} />
                                 </Grid>
                             );
                         })
                     }
-                         <Grid container
-                            direction="row"
-                            justify="flex-start"
-                            alignItems="flex-start" 
-                            item sm={3}
-                            style={{marginTop: 20, marginLeft: this.state.marginLeftTextField * 2}}
-                        >
+                    <Grid container
+                    direction="row"
+                    justify="flex-start"
+                    alignItems="flex-start" 
+                    item sm={3}
+                    style={{marginTop: 20, marginLeft: marginLeftTextField * 2}}
+                    >
                         <Button onClick={this.addMoreField} variant="contained" color="primary">
                             Add more
                         </Button>
@@ -266,7 +288,7 @@ class Teachers extends Component {
                     justify="center"
                     alignItems="center" 
                     item xs={12}
-                    style={{ marginTop: 40}}
+                    style={{ marginTop: 40, marginBottom: 100}}
                 >
                     <Button
                         variant="contained"

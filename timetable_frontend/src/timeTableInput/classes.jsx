@@ -79,28 +79,32 @@ class Classes extends Component {
 
 
         
+    setMarginLeft = () => {
+        if(window.innerWidth <= 700){
+            this.setState({marginLeftTextField: 20})
+        }else{
+            this.setState({marginLeftTextField: 0})
+        }
+    }
+
     updateDimensions = (i) => {
         this.setState({ width: window.innerWidth, height: window.innerHeight });
         if(i === 1){
-            if(window.innerWidth <= 700) 
-                this.setState({marginLeftTextField: 20})
+            this.setMarginLeft();
         }
     };
     
     componentDidMount() {
 
         window.addEventListener('resize', () => this.updateDimensions(1));
-        if(window.innerWidth <= 700) 
-                this.setState({marginLeftTextField: 20})
-        // console.log(this.state.width)
+        this.setMarginLeft();
+        
     }
     componentWillUnmount() {
         window.removeEventListener('resize', () => this.updateDimensions(0));
-        if(window.innerWidth <= 700) 
-                this.setState({marginLeftTextField: 20})
+        this.setMarginLeft();
         // console.log(this.state.width)
-    }
-    
+    }    
 
     render(){
         const {classes} = this.state;
