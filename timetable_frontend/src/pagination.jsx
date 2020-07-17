@@ -22,6 +22,9 @@ class Pagination extends Component{
                         <Button >
                             <Link to = "/home/courses" >4- Add Courses</Link>
                         </Button>
+                        <Button >
+                            <Link to = "/home/table" >5- Time Table</Link>
+                        </Button>
 
                         {/* <Button onClick={()=> filterOrder('delivered')} variant={delivered} >Delivered</Button> */}
                     </ButtonGroup>
