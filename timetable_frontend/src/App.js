@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Switch, Route, Redirect} from "react-router-dom";
+import cTable from 'console.table';
 
 import './App.css';
 import Pagination from "./pagination";
@@ -8,6 +9,7 @@ import ClassRooms from "./timeTableInput/classrooms";
 import Teachers from "./timeTableInput/teachers";
 import Courses from "./timeTableInput/courses";
 import TimeTable from "./timeTableOutput/timeTable";
+import {generateTableWithPost} from "./http/api";
 
 class App extends Component {
 
@@ -47,6 +49,16 @@ class App extends Component {
     console.log(courses)
   }
 
+  generateTable = async() => {
+    const data = {
+      classRooms: this.state.classRooms,
+      classes: this.state.classes,
+      courses: this.state.courses,
+      teachers: this.state.teachers
+    }
+    const table = await generateTableWithPost(data);
+    console.log("table: ", table)
+  }
   
   render(){
     const {teachersName, sessionsName} = this.state;

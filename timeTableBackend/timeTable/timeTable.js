@@ -2,7 +2,13 @@ const cTable = require('console.table');
 const express = require('express');
 const router = express.Router();
 
-let timeTable = [[],[],[],[],[]];
+let timeTable = [     
+    ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
+    ["Tuesday", 0, 0, 0, 0, 0, 0, 0, 0],
+    ["Wednesday", 0, 0, 0, 0, 0, 0, 0, 0],
+    ["Thursday", 0, 0, 0, 0, 0, 0, 0, 0],
+    ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
+];
 
 let classRooms = [
     [[[],[],[],[],[],]],
@@ -192,16 +198,13 @@ generateTimeTable = () => {
 
 
 router.post('/', async(req, res) => {
-
-    timeTable = req.body.timeTable;
     classRooms = req.body.classRooms;
     classes = req.body.classes;
     courses = req.body.courses;
     teachers = req.body.teachers;
-    
     generateTimeTable();
-
-    res.send(allTables);
+    console.table(allTables[2]);
+    res.send(allTables)
 })
 
 module.exports = router;
