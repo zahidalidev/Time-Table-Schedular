@@ -157,7 +157,6 @@ class ClassRooms extends Component {
                 >
                     <Button
                         variant="contained"
-                        // color="purple"
                         style={{backgroundColor: '#90ee90'}}
                         endIcon={<SendIcon>send</SendIcon>}
                         onClick = {this.handleSubmit}

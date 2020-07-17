@@ -12,10 +12,17 @@ class App extends Component {
 
   state = {
     classRooms: [],
+    classes: []
   }
 
   handleClassRooms = (classRooms) => {
     this.setState({classRooms})
+    console.log(classRooms)
+  }
+
+  handleClasses = (classes) => {
+    this.setState({classes})
+    console.log(classes)
   }
 
   render(){
@@ -25,7 +32,7 @@ class App extends Component {
         
         <Switch>
           <Route path = "/home/classrooms" exact render = {(props) => < ClassRooms {...props} onClassRooms = {this.handleClassRooms} />} />
-          <Route path = "/home/classes" exact render={(props) => < Classes {...props} />} />
+          <Route path = "/home/classes" exact render={(props) => < Classes {...props} onClasses = {this.handleClasses} />} />
           <Route path = "/home/teachers" exact render = {(props) => <Teachers {...props} />} />
           <Route path = "/home/courses" exact render = {(props) => <Courses {...props} />} />
         </Switch>
