@@ -10,6 +10,7 @@ import Teachers from "./timeTableInput/teachers";
 import Courses from "./timeTableInput/courses";
 import TimeTable from "./timeTableOutput/timeTable";
 import {generateTableWithPost} from "./http/api";
+import Footer from "./footer/footer";
 
 class App extends Component {
 
@@ -68,7 +69,6 @@ class App extends Component {
 
     return (
       <div className="App">
-        
         <Pagination />
         
         <Switch>
@@ -77,7 +77,9 @@ class App extends Component {
           <Route path = "/home/teachers" exact render = {(props) => <Teachers {...props} onHandleTeachers = {this.handleTeachers} />} />
           <Route path = "/home/courses" exact render = {(props) => <Courses {...props} onTeachersName = {teachersName} onSessionsName = {sessionsName} onCourses = {this.handelCourses} />} />
           <Route path = "/home/table" exact render = {(props) => <TimeTable {...props} onGenerateTable = {this.generateTable} onGeneratedTimeTable = {generatedTimeTable} />} />
+          <Redirect to="/home/classrooms" />
         </Switch>
+        <Footer />
       </div>
     );
   }

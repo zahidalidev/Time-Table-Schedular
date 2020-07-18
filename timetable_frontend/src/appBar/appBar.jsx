@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Link} from "react-router-dom";
+import CardMedia from '@material-ui/core/CardMedia';
+import Logo from "./az_time_schedular.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,6 +65,7 @@ class PrimarySearchAppBar extends Component{
         <div className={useStyles.root}>
           <div style={{backgroundColor: '#202833'}} position="static">
             <Toolbar variant="dense">
+                <img src={Logo}  width="250" height="70" style={{padding: 10, marginLeft: 20}} />
               <Typography variant="h6" style={{marginLeft: 50, backgroundColor: homeBackgroundColor, padding: 10}}>
                 <Link onClick={this.renderPagination} style={{color: "white", textDecoration: 'none'}} to="/home/classrooms" >Home</Link>
               </Typography>
