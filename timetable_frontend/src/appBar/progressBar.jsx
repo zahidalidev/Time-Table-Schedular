@@ -10,7 +10,7 @@ const BorderLinearProgress = withStyles((theme) => ({
     width: '100%'
   },
   colorPrimary: {
-    backgroundColor: "#0f9ac4",
+    backgroundColor: "#76adbc",
   },
   bar: {
     borderRadius: 5,
