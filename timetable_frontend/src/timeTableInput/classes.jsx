@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import SendIcon from '@material-ui/icons/Send';
-
+import {Link} from 'react-router-dom';
 
 const CssTextField = withStyles({
   root: {
@@ -161,12 +161,11 @@ class Classes extends Component {
                 >
                     <Button
                         variant="contained"
-                        // color="purple"
-                        style={{backgroundColor: '#90ee90'}}
+                        style={{backgroundColor: '#2a3547', color: "#d0d6e0"}}
                         endIcon={<SendIcon>send</SendIcon>}
                         onClick = {this.handleSubmit}
                     >
-                        Submit and Next
+                        <Link style={{color: "#d0d6e0", textDecoration: 'none'}} to = "/home/teachers" >Submit and Next</Link>
                     </Button>
                 </Grid>
             </form>

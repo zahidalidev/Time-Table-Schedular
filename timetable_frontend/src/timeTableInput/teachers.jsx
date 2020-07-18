@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Divider from '@material-ui/core/Divider';
+import {Link} from 'react-router-dom';
 
 const CssTextField = withStyles({
   root: {
@@ -292,11 +293,11 @@ class Teachers extends Component {
                 >
                     <Button
                         variant="contained"
-                        style={{backgroundColor: '#90ee90'}}
+                        style={{backgroundColor: '#2a3547', color: "#d0d6e0"}}
                         endIcon={<SendIcon>send</SendIcon>}
                         onClick = {this.handleSubmit}
                     >
-                        Submit and Next
+                        <Link style={{color: "#d0d6e0", textDecoration: 'none'}} to = "/home/courses" >Submit and Next</Link>
                     </Button>
                 </Grid>
             </form>
