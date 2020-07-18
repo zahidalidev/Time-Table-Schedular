@@ -100,47 +100,48 @@ generateTimeTable = () => {
             
             for(let i = 0; i < daysPerWeek; i++){
                 
-                let y = 0;
                 let j = 1;
-
-                while(j < hoursPerDay && j <= courses.length){
+                let jCouunt = 0;
+                while(j < hoursPerDay ){
 
                     if((timeTable[i][j] == 0) && (classRooms[cl][1][i][j] == 0) && (classes[cls][1][i][j] == 0)) {
-
-                        if(y >= courses.length){
-                            y = 0;
-                            j++;
-                        }
-
-                        let chCourse = checkCourse(courses[y], i, j, 0, cls);
                         
-                        if (chCourse[0]){
-
-                            for(let m = 0; m < courses[y].crHouurs[0]; m++){
-
-                                timeTable[i][j] = courses[y].name + ', ' + courses[y].teacher + ', ' + classRooms[cl][0];
-                                classRooms[cl][1][i][j] = 1;
-                                classes[cls][1][i][j] = 1;
-                                teachers[chCourse[1]][1][i][j] = 1;
-                                j++
-
+                        let y = 0;
+                        while(y < courses.length){
+                            if(j === hoursPerDay){
+                                j = 1;
                             }
-                            courses[y].crHouurs.splice(0, 1);         //removing credit used credit hours
                             
-                            if(courses[y].crHouurs.length == 0){
-                                courses.splice(y, 1)     //removing course if its all credit hours is used
-                            }
-                            else{
+                            let chCourse = checkCourse(courses[y], i, j, 0, cls);
+                            
+                            if (chCourse[0]){
+
+                                for(let m = 0; m < courses[y].crHouurs[0]; m++){
+
+                                    timeTable[i][j] = courses[y].name + ', ' + courses[y].teacher + ', ' + classRooms[cl][0];
+                                    classRooms[cl][1][i][j] = 1;
+                                    classes[cls][1][i][j] = 1;
+                                    teachers[chCourse[1]][1][i][j] = 1;
+                                    j++;
+
+                                }
+                                courses[y].crHouurs.splice(0, 1);         //removing credit used credit hours
+                                
+                                if(courses[y].crHouurs.length == 0){
+                                    courses.splice(y, 1)     //removing course if its all credit hours is used
+                                    console.log('y1', y)
+                                }
+                                
+                            }else{
                                 y++;
+                                console.log('y2: ', y)
                             }
-                            
-                        }else{
-                            y++;
                         }
-
+                        
                     }else{
                         j++;
                     }
+                    j++;
                 }
             }
            
@@ -202,11 +203,12 @@ router.post('/', async(req, res) => {
     classes = req.body.classes;
     courses = req.body.courses;
     teachers = req.body.teachers;
-    console.table(teachers);
+    console.log("called")
     generateTimeTable();
-    console.table(teachers);
+    console.log(courses);
+    // console.table(allTables[1]);
     res.send(allTables)
-    allTables = [];
+    // allTables = [];
 })
 
 module.exports = router;
