@@ -10,7 +10,8 @@ class Pagination extends Component{
 
     state = {
         smallScreen: false,
-        reRender: false
+        reRender: false,
+        progressValue: 1
     }
 
     setMarginLeft = () => {
@@ -42,11 +43,12 @@ class Pagination extends Component{
 
     reRednerPagination = () => {
         const reRender = !this.state.reRender;
-        this.setState({reRender})
+   
+        this.setState({reRender, progressValue: 0})
     }
 
     render(){
-        const {smallScreen} = this.state;
+        const {smallScreen, progressValue} = this.state;
         
         const backColorDefault = "#2a3547";
         const textCOlor = "#dadfe8";
@@ -58,31 +60,30 @@ class Pagination extends Component{
         const changeColor3 = selectedId === "teachers";
         const changeColor4 = selectedId === "courses";
         const changeColor5 = selectedId === "table";
-
         return(
             <div>
                 <PrimarySearchAppBar onreRednerPagination = {this.reRednerPagination} />
                 <form noValidate>
                     <Grid container style={{marginTop: 100}} direction="col" justify="center" alignItems="center" item sm={12} >
                         <Grid container direction="row" justify="center" alignItems="center" item sm={6} >
-                            <ProgressBars />
+                            <ProgressBars ononProgressValue = {progressValue ? this.props.onProgressValue : progressValue} />
                         </Grid>
                         <Grid container style={{marginTop: 40}} direction="row" justify="center" alignItems="center" item sm={12} >
                             <ButtonGroup color="primary" aria-label="outlined primary button group">
                                 <Button disabled style={{backgroundColor: changeColor1 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
-                                    <p style={{fontSize: smallScreen ? 7 : 11}}>1- Add Class Rooms</p>
+                                    <p style={{fontSize: smallScreen ? 7 : 11, marginBottom: -1}}>1- Add Class Rooms</p>
                                 </Button>
                                 <Button disabled style={{backgroundColor: changeColor2 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
-                                    <p style={{fontSize: smallScreen ? 7 : 11}}>2- Add Classes</p>
+                                    <p style={{fontSize: smallScreen ? 7 : 11, marginBottom: -1}}>2- Add Classes</p>
                                 </Button>
                                 <Button disabled style={{backgroundColor: changeColor3 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
-                                    <p style={{fontSize: smallScreen ? 7 : 11}}>3- Add Teachers</p>
+                                    <p style={{fontSize: smallScreen ? 7 : 11, marginBottom: -1}}>3- Add Teachers</p>
                                 </Button>
                                 <Button disabled style={{backgroundColor: changeColor4 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
-                                    <p style={{fontSize: smallScreen ? 7 : 11}}>4- Add Courses</p>
+                                    <p style={{fontSize: smallScreen ? 7 : 11, marginBottom: -1}}>4- Add Courses</p>
                                 </Button>
                                 <Button disabled style={{backgroundColor: changeColor5 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
-                                    <p style={{fontSize: smallScreen ? 7 : 11}}>5- Time Table</p>
+                                    <p style={{fontSize: smallScreen ? 7 : 11, marginBottom: -1}}>5- Time Table</p>
                                 </Button>
 
                                 {/* <Button onClick={()=> filterOrder('delivered')} variant={delivered} >Delivered</Button> */}

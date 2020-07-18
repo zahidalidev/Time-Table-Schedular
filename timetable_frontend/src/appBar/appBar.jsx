@@ -19,55 +19,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 class PrimarySearchAppBar extends Component{
-  
-    state = {
-        homeBackgroundColor: ''
-    }
 
     updateDimensions = (i) => {
         this.setState({ width: window.innerWidth, height: window.innerHeight });
         console.log("hi chane")
     };
-    
-    componentDidMount() {
-        var oldURL = "";
-        var currentURL = window.location.href;
-        const checkURLchange = (currentURL) => {
 
-            if(currentURL != oldURL){
-                if(window.location.pathname.substr(6) === "classrooms"){
-                    this.setState({homeBackgroundColor: "#0f9ac4"});
-                }else{
-                    this.setState({homeBackgroundColor: ""});
-                }
-                oldURL = currentURL;
-            }
-
-            oldURL = window.location.href;
-            setInterval(function() {
-                checkURLchange(window.location.href);
-            }, 1000);
-
-        }
-
-        checkURLchange();
-    }
-    
+   
     renderPagination = () => {
         this.props.onreRednerPagination()
     }
 
   render() {
     
-    const {homeBackgroundColor} = this.state;
+    const {ononHomePath} = this.props;
     
       return (
         <div className={useStyles.root}>
           <div style={{backgroundColor: '#202833'}} position="static">
             <Toolbar variant="dense">
                 <img src={Logo}  width="250" height="70" style={{padding: 10, marginLeft: 20}} />
-              <Typography variant="h6" style={{marginLeft: 50, backgroundColor: homeBackgroundColor, padding: 10}}>
-                <Link onClick={this.renderPagination} style={{color: "white", textDecoration: 'none'}} to="/home/classrooms" >Home</Link>
+              <Typography variant="h6" style={{marginLeft: 50}}>
+                <Link onClick={this.renderPagination} style={{color:  "white", textDecoration: 'none'}} to="/home/classrooms" >Home</Link>
               </Typography>
             </Toolbar>
           </div>

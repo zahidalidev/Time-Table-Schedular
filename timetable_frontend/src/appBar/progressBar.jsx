@@ -48,7 +48,7 @@ function FacebookCircularProgress(props) {
         thickness={4}
         {...props}
         value={100}
-      />
+        />
       <CircularProgress
         variant="indeterminate"
         disableShrink
@@ -60,6 +60,7 @@ function FacebookCircularProgress(props) {
         thickness={4}
         {...props}
       />
+      {/* <span style={{marginLeft: 24}} >Creating...</span> */}
     </div>
   );
 }
@@ -70,44 +71,42 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ProgressBars() {
+export default function ProgressBars({ononProgressValue}) {
     const classes = useStyles();
-    let ProgressValue = 0;
-    var oldURL = "";
-    var currentURL = window.location.href;
-    const checkURLchange = (currentURL) => {
+    // var oldURL = "";
+    // var currentURL = window.location.href;
+    // const checkURLchange = (currentURL) => {
 
-        if(currentURL != oldURL){
-            const pathNew = window.location.pathname.substr(6);
-            if(pathNew === "classrooms"){
-                ProgressValue = 0;
-            }else if(pathNew === "classes"){
-                ProgressValue = 25;
-            }else if(pathNew === "teachers"){
-                ProgressValue = 50;
-            }else if(pathNew === "courses"){
-                ProgressValue = 75
-            }else if(pathNew === "table"){
-                ProgressValue = 100
-            }
+    //     if(currentURL != oldURL){
+    //         const pathNew = window.location.pathname.substr(6);
+    //         if(pathNew === "classrooms"){
+    //             ProgressValue = 0;
+    //         }else if(pathNew === "classes"){
+    //             ProgressValue = 25;
+    //         }else if(pathNew === "teachers"){
+    //             ProgressValue = 50;
+    //         }else if(pathNew === "courses"){
+    //             ProgressValue = 75
+    //         }else if(pathNew === "table"){
+    //             ProgressValue = 100
+    //         }
 
-            oldURL = currentURL;
-        }
+    //         oldURL = currentURL;
+    //     }
 
-        oldURL = window.location.href;
-        setInterval(function() {
-            checkURLchange(window.location.href);
-        }, 1000);
+    //     oldURL = window.location.href;
+    //     setInterval(function() {
+    //         checkURLchange(window.location.href);
+    //     }, 1000);
 
-    }
+    // }
 
-    checkURLchange();
-
+    // checkURLchange();
   return (
     <div className={classes.root}>
       <FacebookCircularProgress />
       <br />
-      <BorderLinearProgress variant="determinate" value={ProgressValue} />
+      <BorderLinearProgress variant="determinate" value={ononProgressValue} />
     </div>
   );
 }

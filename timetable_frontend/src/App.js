@@ -21,11 +21,12 @@ class App extends Component {
     courses: [],
     sessionsName: [],
     teachersName: [],
-    generatedTimeTable: []
+    generatedTimeTable: [],
+    progressValue: 0
   }
 
   handleClassRooms = (classRooms) => {
-    this.setState({classRooms})
+    this.setState({classRooms, progressValue: 25})
   }
 
   handleClasses = (classes) => {
@@ -34,7 +35,7 @@ class App extends Component {
       sessionsName.push(clas[0]);
     })
 
-    this.setState({classes, sessionsName})
+    this.setState({classes, sessionsName, progressValue: 50})
   }
 
   handleTeachers = (teachers) => {
@@ -43,12 +44,11 @@ class App extends Component {
       teachersName.push(teacher[0]);
     })
 
-    this.setState({teachers, teachersName})
+    this.setState({teachers, teachersName, progressValue: 75})
   }
 
   handelCourses = (courses) => {
-    this.setState({courses})
-    console.log(courses)
+    this.setState({courses, progressValue: 100})
   }
 
   generateTable = async() => {
@@ -65,11 +65,11 @@ class App extends Component {
   }
   
   render(){
-    const {teachersName, sessionsName, generatedTimeTable} = this.state;
+    const {teachersName, sessionsName, generatedTimeTable, progressValue} = this.state;
 
     return (
       <div className="App">
-        <Pagination />
+        <Pagination onProgressValue = {progressValue} />
         
         <Switch>
           <Route path = "/home/classrooms" exact render = {(props) => < ClassRooms {...props} onClassRooms = {this.handleClassRooms} />} />
