@@ -4,12 +4,13 @@ import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import PrimarySearchAppBar from "./appBar/appBar";
+import ProgressBars from "./appBar/progressBar"
 
 class Pagination extends Component{
 
     state = {
         smallScreen: false,
-        reRender: false,
+        reRender: false
     }
 
     setMarginLeft = () => {
@@ -62,26 +63,31 @@ class Pagination extends Component{
             <div>
                 <PrimarySearchAppBar onreRednerPagination = {this.reRednerPagination} />
                 <form noValidate>
-                    <Grid container style={{marginTop: 150}} direction="row" justify="center" alignItems="center" item sm={12} >
-                        <ButtonGroup color="primary" aria-label="outlined primary button group">
-                            <Button style={{backgroundColor: changeColor1 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
-                                <p style={{fontSize: smallScreen ? 7 : 11}}>1- Add Class Rooms</p>
-                            </Button>
-                            <Button style={{backgroundColor: changeColor2 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
-                                <p style={{fontSize: smallScreen ? 7 : 11}}>2- Add Classes</p>
-                            </Button>
-                            <Button style={{backgroundColor: changeColor3 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
-                                <p style={{fontSize: smallScreen ? 7 : 11}}>3- Add Teachers</p>
-                            </Button>
-                            <Button style={{backgroundColor: changeColor4 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
-                                <p style={{fontSize: smallScreen ? 7 : 11}}>4- Add Courses</p>
-                            </Button>
-                            <Button style={{backgroundColor: changeColor5 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
-                                <p style={{fontSize: smallScreen ? 7 : 11}}>5- Time Table</p>
-                            </Button>
+                    <Grid container style={{marginTop: 100}} direction="col" justify="center" alignItems="center" item sm={12} >
+                        <Grid container direction="row" justify="center" alignItems="center" item sm={6} >
+                            <ProgressBars />
+                        </Grid>
+                        <Grid container style={{marginTop: 40}} direction="row" justify="center" alignItems="center" item sm={12} >
+                            <ButtonGroup color="primary" aria-label="outlined primary button group">
+                                <Button disabled style={{backgroundColor: changeColor1 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
+                                    <p style={{fontSize: smallScreen ? 7 : 11}}>1- Add Class Rooms</p>
+                                </Button>
+                                <Button disabled style={{backgroundColor: changeColor2 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
+                                    <p style={{fontSize: smallScreen ? 7 : 11}}>2- Add Classes</p>
+                                </Button>
+                                <Button disabled style={{backgroundColor: changeColor3 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
+                                    <p style={{fontSize: smallScreen ? 7 : 11}}>3- Add Teachers</p>
+                                </Button>
+                                <Button disabled style={{backgroundColor: changeColor4 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
+                                    <p style={{fontSize: smallScreen ? 7 : 11}}>4- Add Courses</p>
+                                </Button>
+                                <Button disabled style={{backgroundColor: changeColor5 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
+                                    <p style={{fontSize: smallScreen ? 7 : 11}}>5- Time Table</p>
+                                </Button>
 
-                            {/* <Button onClick={()=> filterOrder('delivered')} variant={delivered} >Delivered</Button> */}
-                        </ButtonGroup>
+                                {/* <Button onClick={()=> filterOrder('delivered')} variant={delivered} >Delivered</Button> */}
+                            </ButtonGroup>
+                        </Grid>
                     </Grid>
                 </form>
             </div>

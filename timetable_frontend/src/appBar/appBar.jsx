@@ -49,7 +49,6 @@ class PrimarySearchAppBar extends Component{
         }
 
         checkURLchange();
-        
     }
     
     renderPagination = () => {
