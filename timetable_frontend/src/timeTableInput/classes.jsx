@@ -38,11 +38,7 @@ class Classes extends Component {
         buttonDisabled: true
     }
 
-    handleChange = (e, i) => {
-        const classes = [...this.state.classes];
-        classes[i].name = e.target.value;
-        this.setState({classes})
-
+    sumbitButtonConstraint = (classes) => {
         let count = 0;
         classes.map((clas, i) => {
             if(!clas.name){
@@ -56,10 +52,19 @@ class Classes extends Component {
             this.setState({buttonDisabled: false})
         }
     }
+    handleChange = (e, i) => {
+        const classes = [...this.state.classes];
+        classes[i].name = e.target.value;
+        this.setState({classes})
+
+        this.sumbitButtonConstraint(classes);
+    }
 
     addMoreField = () => {
         const classes = [...this.state.classes, {name: ""}]
         this.setState({classes})
+
+        this.sumbitButtonConstraint(classes);
     }
 
     handleSubmit = () => {
@@ -95,6 +100,8 @@ class Classes extends Component {
         }else{
             alert("Enter the Name of Atleast one Class")
         }
+
+        this.sumbitButtonConstraint(classes);
     }
 
 

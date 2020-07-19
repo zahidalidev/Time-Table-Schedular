@@ -38,11 +38,7 @@ class ClassRooms extends Component {
         buttonDisabled: true
     }
 
-    handleChange = (e, i) => {
-        const rooms = [...this.state.rooms];
-        rooms[i].name = e.target.value;
-        this.setState({rooms})
-
+    sumbitButtonCOnstraint = (rooms) => {
         let count = 0;
         rooms.map((room, i) => {
             if(!room.name){
@@ -56,9 +52,33 @@ class ClassRooms extends Component {
         }
     }
 
+    checkUniqueArray = (rooms) => {
+        let singleArray = [];
+        rooms.map(room => {
+            singleArray.push(room.name);
+        })
+        let hasDuplicate = singleArray.some((val, i) => singleArray.indexOf(val) !== i);
+        if(hasDuplicate){
+            this.setState({buttonDisabled: true})
+            alert('please enter unique name')
+        }
+    }
+
+    handleChange = (e, i) => {
+        const rooms = [...this.state.rooms];
+        rooms[i].name = e.target.value;
+        this.setState({rooms})
+
+        this.sumbitButtonCOnstraint(rooms)
+
+        this.checkUniqueArray(rooms);
+    }
+
     addMoreField = () => {
         const rooms = [...this.state.rooms, {name: ""}]
         this.setState({rooms})
+
+        this.sumbitButtonCOnstraint(rooms)
     }
 
     handleSubmit = () => {
@@ -94,6 +114,8 @@ class ClassRooms extends Component {
         }else{
             alert("Enter the Name of Atleast one Room")
         }
+
+        this.sumbitButtonCOnstraint(rooms)
     }
 
 

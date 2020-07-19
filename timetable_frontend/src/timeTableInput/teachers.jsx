@@ -51,16 +51,7 @@ class Teachers extends Component {
         buttonDisabled: true
     }
 
-    handleChange = (e, i, j, k) => {
-        const teachers = [...this.state.teachers];
-        
-        if(k === undefined){
-            teachers[i][j] = e.target.value;
-        }else{
-            teachers[i][1][j][k] = e.target.value;
-        }
-        this.setState({teachers})
-
+    sumbitButtonConstraint = (teachers) => {
         let count = 0;
         teachers.map(teacher => {
             if(!teacher[0]){
@@ -75,6 +66,19 @@ class Teachers extends Component {
         }
     }
 
+    handleChange = (e, i, j, k) => {
+        const teachers = [...this.state.teachers];
+        
+        if(k === undefined){
+            teachers[i][j] = e.target.value;
+        }else{
+            teachers[i][1][j][k] = e.target.value;
+        }
+        this.setState({teachers})
+
+        this.sumbitButtonConstraint(teachers);
+    }
+
     addMoreField = () => {
         const teachers = [...this.state.teachers, ["", [
             ["Monday", 1, 1, 1, 1, 1, 1, 1, 1],
@@ -84,6 +88,8 @@ class Teachers extends Component {
             ["Friday", 1, 1, 1, 1, 1, 1, 1, 1],
         ]]]
         this.setState({teachers});
+
+        this.sumbitButtonConstraint(teachers);
     }
 
     handleSubmit = () => {
@@ -105,6 +111,8 @@ class Teachers extends Component {
         }else{
             alert("Add atleast one teacher!")
         }
+
+        this.sumbitButtonConstraint(teachers);
     }
 
 

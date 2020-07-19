@@ -45,6 +45,21 @@ class Courses extends Component {
         buttonDisabled: true
     }
 
+    sumbitButtonConstraint = (courses) => {
+        let count = 0;
+        courses.map((course, i) => {
+            if(!course.name || !course.session || !course.teacher || !course.crHouurs){
+                count++;
+            }
+        })
+
+        if(count){
+            this.setState({buttonDisabled: true})
+        }else{
+            this.setState({buttonDisabled: false})
+        }
+    }
+
     handleChange = (e, i, j) => {
         const crditHourArray = [[1, 1, 1], [1, 2], [2, 1], [3]];
 
@@ -60,23 +75,14 @@ class Courses extends Component {
         courses[i][name] = value;
         this.setState({courses})
 
-        let count = 0;
-        courses.map((course, i) => {
-            if(!course.name || !course.session || !course.teacher || !course.crHouurs){
-                count++;
-            }
-        })
-
-        if(count){
-            this.setState({buttonDisabled: true})
-        }else{
-            this.setState({buttonDisabled: false})
-        }
+        this.sumbitButtonConstraint(courses);
     }
 
     addMoreField = () => {
         const courses = [...this.state.courses, {name: '', session: '', teacher: '', crHouurs: ''}];
         this.setState({courses});
+
+        this.sumbitButtonConstraint(courses);
     }
 
     handleSubmit = () => {
@@ -99,6 +105,8 @@ class Courses extends Component {
         }else{
             alert('Add atleast one Course')
         }
+
+        this.sumbitButtonConstraint(courses);
     }
 
     setMarginLeft = () => {
