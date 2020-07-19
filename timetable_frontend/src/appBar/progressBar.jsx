@@ -2,12 +2,13 @@ import React from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Grid from '@material-ui/core/Grid';
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: 10,
     borderRadius: 5,
-    width: '100%'
+    width: '100%',
   },
   colorPrimary: {
     backgroundColor: "#76adbc",
@@ -65,14 +66,9 @@ function FacebookCircularProgress(props) {
   );
 }
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
-});
+
 
 export default function ProgressBars({ononProgressValue}) {
-    const classes = useStyles();
     // var oldURL = "";
     // var currentURL = window.location.href;
     // const checkURLchange = (currentURL) => {
@@ -103,10 +99,19 @@ export default function ProgressBars({ononProgressValue}) {
 
     // checkURLchange();
   return (
-    <div className={classes.root}>
-      <FacebookCircularProgress />
-      <br />
-      <BorderLinearProgress variant="determinate" value={ononProgressValue} />
+    <div className style={{flexGrow: 1}}>
+      <form noValidate>
+        <Grid container direction="row" item sm={12} >
+          <Grid container direction="row" item sm={1} >
+            <FacebookCircularProgress />
+          </Grid>
+          <Grid container direction="row" item sm={11} style={{paddingLeft: 5, marginTop: 15}} >
+
+          {/* <br /> */}
+            <BorderLinearProgress variant="determinate" value={ononProgressValue} />
+          </Grid>
+        </Grid>
+      </form>
     </div>
   );
 }
