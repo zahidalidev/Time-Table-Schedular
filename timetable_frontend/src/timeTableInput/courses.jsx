@@ -41,7 +41,8 @@ class Courses extends Component {
             {name: '', session: '', teacher: '', crHouurs: ''}
         ],
         width: 0, height: 0,
-        marginLeftTextField: 0 
+        marginLeftTextField: 0,
+        buttonDisabled: true
     }
 
     handleChange = (e, i, j) => {
@@ -58,15 +59,36 @@ class Courses extends Component {
 
         courses[i][name] = value;
         this.setState({courses})
+
+        let count = 0;
+        courses.map((course, i) => {
+            if(!course.name || !course.session || !course.teacher || !course.crHouurs){
+                count++;
+            }
+        })
+
+        if(count){
+            this.setState({buttonDisabled: true})
+        }else{
+            this.setState({buttonDisabled: false})
+        }
     }
 
     addMoreField = () => {
-        const courses = [...this.state.courses, {name: '', session: '', teacher: '', crHouurs: []}];
+        const courses = [...this.state.courses, {name: '', session: '', teacher: '', crHouurs: ''}];
         this.setState({courses});
     }
 
     handleSubmit = () => {
-        this.props.onCourses(this.state.courses);
+        const courses = [...this.state.courses];
+
+        courses.map((course, i) => {
+            if(!course.name || !course.session || !course.teacher || !course.crHouurs){
+                courses.splice(i, 1);
+            }
+        })
+        console.log(courses)
+        this.props.onCourses(courses);
     }
 
     handleRemove = (i) => {
@@ -105,7 +127,7 @@ class Courses extends Component {
     }
     
     render(){
-        const {courses} = this.state;
+        const {courses, buttonDisabled} = this.state;
         const {onTeachersName, onSessionsName} = this.props;
         return (
             <form noValidate>
@@ -213,7 +235,7 @@ class Courses extends Component {
                             item sm={2}
                             style={{marginTop: 40}}
                         >
-                        <Button onClick={this.addMoreField} variant="contained" color="primary">
+                        <Button style={{backgroundColor: "#2a3547", color: "#d0d6e0"}} onClick={this.addMoreField} variant="contained">
                             Add more
                         </Button>
                     </Grid>
@@ -227,11 +249,12 @@ class Courses extends Component {
                 >
                     <Button
                         variant="contained"
-                        style={{backgroundColor: '#2a3547', color: "#d0d6e0"}}
+                        style={{backgroundColor: buttonDisabled ? "#e0e0e0":'#2a3547', color: buttonDisabled ? "#c0cad8" : "#d0d6e0"}}
                         endIcon={<SendIcon>send</SendIcon>}
                         onClick = {this.handleSubmit}
+                        disabled = {buttonDisabled}
                     >
-                        <Link style={{color: "#d0d6e0", textDecoration: 'none'}} to = "/home/table" >Submit and Next</Link>
+                        <Link style={{color: buttonDisabled ? "#c0cad8" : "#d0d6e0", textDecoration: 'none'}} to = "/home/table" >Submit and Next</Link>
                     </Button>
                 </Grid>
             </form>

@@ -34,13 +34,27 @@ class Classes extends Component {
     state = {
         classes: [{name: ""}],
         width: 0, height: 0,
-        marginLeftTextField: 0 
+        marginLeftTextField: 0,
+        buttonDisabled: true
     }
 
     handleChange = (e, i) => {
         const classes = [...this.state.classes];
         classes[i].name = e.target.value;
         this.setState({classes})
+
+        let count = 0;
+        classes.map((clas, i) => {
+            if(!clas.name){
+                count++;
+            }
+        })
+
+        if(count){
+            this.setState({buttonDisabled: true})
+        }else{
+            this.setState({buttonDisabled: false})
+        }
     }
 
     addMoreField = () => {
@@ -62,6 +76,13 @@ class Classes extends Component {
             ]];
             classesArray.push(classArray);
         })
+
+        classes.map((room, i) => {
+            if(!room.name){
+                classesArray.splice(i, 1);
+            }
+        })
+
         this.props.onClasses(classesArray);
     }
 
@@ -107,7 +128,7 @@ class Classes extends Component {
     }    
 
     render(){
-        const {classes} = this.state;
+        const {classes, buttonDisabled} = this.state;
 
         return (
             <form noValidate>
@@ -147,7 +168,7 @@ class Classes extends Component {
                             item sm={4}
                             style={{marginTop: 20, marginLeft: this.state.marginLeftTextField * 2}}
                         >
-                        <Button onClick={this.addMoreField} variant="contained" color="primary">
+                        <Button style={{backgroundColor: "#2a3547", color: "#d0d6e0"}} onClick={this.addMoreField} variant="contained" >
                             Add more
                         </Button>
                     </Grid>
@@ -161,11 +182,12 @@ class Classes extends Component {
                 >
                     <Button
                         variant="contained"
-                        style={{backgroundColor: '#2a3547', color: "#d0d6e0"}}
+                        style={{backgroundColor: buttonDisabled ? "#e0e0e0":'#2a3547', color: buttonDisabled ? "#c0cad8" : "#d0d6e0"}}
                         endIcon={<SendIcon>send</SendIcon>}
                         onClick = {this.handleSubmit}
+                        disabled = {buttonDisabled}
                     >
-                        <Link style={{color: "#d0d6e0", textDecoration: 'none'}} to = "/home/teachers" >Submit and Next</Link>
+                        <Link style={{color: buttonDisabled ? "#c0cad8" : "#d0d6e0", textDecoration: 'none'}} to = "/home/teachers" >Submit and Next</Link>
                     </Button>
                 </Grid>
             </form>

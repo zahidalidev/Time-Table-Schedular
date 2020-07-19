@@ -47,7 +47,8 @@ class Teachers extends Component {
         ]]],
 
         width: 0, height: 0,
-        marginLeftTextField: 0 
+        marginLeftTextField: 0,
+        buttonDisabled: true
     }
 
     handleChange = (e, i, j, k) => {
@@ -59,6 +60,19 @@ class Teachers extends Component {
             teachers[i][1][j][k] = e.target.value;
         }
         this.setState({teachers})
+
+        let count = 0;
+        teachers.map(teacher => {
+            if(!teacher[0]){
+                count++;
+            }
+        })
+
+        if(count){
+            this.setState({buttonDisabled: true})
+        }else{
+            this.setState({buttonDisabled: false})
+        }
     }
 
     addMoreField = () => {
@@ -73,7 +87,14 @@ class Teachers extends Component {
     }
 
     handleSubmit = () => {
-        this.props.onHandleTeachers(this.state.teachers);
+        const teachers = [...this.state.teachers];
+
+        teachers.map((teacher, i) => {
+            if(!teacher[0]){
+                teachers.splice(i, 1);
+            }
+        })
+        this.props.onHandleTeachers(teachers);
     }
 
     handleRemove = (i) => {
@@ -117,7 +138,7 @@ class Teachers extends Component {
     
 
     render(){
-        const { teachers, marginLeftTextField } = this.state;
+        const { teachers, marginLeftTextField, buttonDisabled } = this.state;
         const leftMargin = marginLeftTextField === 0 ? marginLeftTextField * -4 + 70 : 70;
 
         return (
@@ -279,7 +300,7 @@ class Teachers extends Component {
                     item sm={3}
                     style={{marginTop: 20, marginLeft: marginLeftTextField * 2}}
                     >
-                        <Button onClick={this.addMoreField} variant="contained" color="primary">
+                        <Button style={{backgroundColor: "#2a3547", color: "#d0d6e0"}} onClick={this.addMoreField} variant="contained" >
                             Add more
                         </Button>
                     </Grid>
@@ -293,11 +314,12 @@ class Teachers extends Component {
                 >
                     <Button
                         variant="contained"
-                        style={{backgroundColor: '#2a3547', color: "#d0d6e0"}}
+                        style={{backgroundColor: buttonDisabled ? "#e0e0e0":'#2a3547', color: buttonDisabled ? "#c0cad8" : "#d0d6e0"}}
                         endIcon={<SendIcon>send</SendIcon>}
                         onClick = {this.handleSubmit}
+                        disabled = {buttonDisabled}
                     >
-                        <Link style={{color: "#d0d6e0", textDecoration: 'none'}} to = "/home/courses" >Submit and Next</Link>
+                        <Link style={{color: buttonDisabled ? "#c0cad8" : "#d0d6e0", textDecoration: 'none'}} to = "/home/courses" >Submit and Next</Link>
                     </Button>
                 </Grid>
             </form>
