@@ -154,7 +154,7 @@ class Classes extends Component {
 
         return (
             <form noValidate>
-                <Grid container row alignItems="center" item xs={12} style={{marginTop: 60}}>
+                <Grid container alignItems="center" item xs={12} style={{marginTop: 60}}>
                     {
                         classes.map((clas, i) => {
                             return (
