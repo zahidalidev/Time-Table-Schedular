@@ -52,12 +52,27 @@ class Classes extends Component {
             this.setState({buttonDisabled: false})
         }
     }
+
+    checkUniqueArray = (classes) => {
+        let singleArray = [];
+        classes.map(clas => {
+            singleArray.push(clas.name);
+        })
+        let hasDuplicate = singleArray.some((val, i) => singleArray.indexOf(val) !== i);
+        if(hasDuplicate){
+            this.setState({buttonDisabled: true})
+            alert('please enter unique name')
+        }
+    }
+
     handleChange = (e, i) => {
         const classes = [...this.state.classes];
         classes[i].name = e.target.value;
         this.setState({classes})
 
         this.sumbitButtonConstraint(classes);
+
+        this.checkUniqueArray(classes);
     }
 
     addMoreField = () => {

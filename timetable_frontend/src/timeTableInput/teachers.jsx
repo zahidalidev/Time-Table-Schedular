@@ -66,6 +66,18 @@ class Teachers extends Component {
         }
     }
 
+    checkUniqueArray = (teachers) => {
+        let singleArray = [];
+        teachers.map(teacher => {
+            singleArray.push(teacher[0]);
+        })
+        let hasDuplicate = singleArray.some((val, i) => singleArray.indexOf(val) !== i);
+        if(hasDuplicate){
+            this.setState({buttonDisabled: true})
+            alert('please enter unique name')
+        }
+    }
+
     handleChange = (e, i, j, k) => {
         const teachers = [...this.state.teachers];
         
@@ -77,6 +89,8 @@ class Teachers extends Component {
         this.setState({teachers})
 
         this.sumbitButtonConstraint(teachers);
+
+        this.checkUniqueArray(teachers);
     }
 
     addMoreField = () => {

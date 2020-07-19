@@ -60,6 +60,21 @@ class Courses extends Component {
         }
     }
 
+    checkUniqueArray = (courses) => {
+        let singleArray = [];
+
+        courses.map(course => {
+            singleArray.push(course.name);
+        })
+
+        let hasDuplicate = singleArray.some((val, i) => singleArray.indexOf(val) !== i);
+        if(hasDuplicate){
+            this.setState({buttonDisabled: true})
+            alert('please enter unique name')
+        }
+    }
+
+
     handleChange = (e, i, j) => {
         const crditHourArray = [[1, 1, 1], [1, 2], [2, 1], [3]];
 
@@ -76,6 +91,8 @@ class Courses extends Component {
         this.setState({courses})
 
         this.sumbitButtonConstraint(courses);
+
+        this.checkUniqueArray(courses);
     }
 
     addMoreField = () => {
