@@ -152,7 +152,7 @@ class Courses extends Component {
     }
     
     render(){
-        const {courses, buttonDisabled} = this.state;
+        const {courses, buttonDisabled, marginLeftTextField} = this.state;
         const {onTeachersName, onSessionsName} = this.props;
         return (
             <form noValidate>
@@ -174,7 +174,7 @@ class Courses extends Component {
 
                             return (
                                 <Grid container key = {i} direction="row" justify="center" alignItems="center" item xs={8} style={{marginTop: 50, marginLeft: 80}}>  
-                                    <Grid  container direction="row" justify="flex-end" alignItems="center" item sm={2} >                                  
+                                    <Grid  container direction="row" justify="flex-end" alignItems="center" item sm={2} style={{marginLeft: marginLeftTextField * -14, marginRight: marginLeftTextField * -1}}>                                  
                                         <Button
                                             variant="contained"
                                             color="secondary"
@@ -184,7 +184,7 @@ class Courses extends Component {
                                         </Button>
                                     </Grid>
 
-                                    <Grid container direction="row" justify="center" alignItems="center" item sm={3} style={{marginLeft: 30}}>                                    
+                                    <Grid container direction="row" justify="center" alignItems="center" item sm={3} style={{marginLeft: 30, marginRight: -marginLeftTextField * 4}}>                                    
                                         <CssTextField
                                             label = {`Course-${i+1} Name`}
                                             variant = "outlined"
@@ -196,7 +196,7 @@ class Courses extends Component {
                                         />
                                     </Grid>
 
-                                    <Grid container direction="row" justify="center" alignItems="center" item sm={2} >
+                                    <Grid container direction="row" justify="center" alignItems="center" item sm={2} style={{marginTop: marginLeftTextField}} >
                                         <FormControl>
                                             <Select
                                                 labelId="demo-simple-select-label"
@@ -258,7 +258,7 @@ class Courses extends Component {
                             justify="flex-start"
                             alignItems="flex-start" 
                             item sm={2}
-                            style={{marginTop: 40}}
+                            style={{marginTop: 40, marginLeft: marginLeftTextField * 7}}
                         >
                         <Button style={{backgroundColor: "#2a3547", color: "#d0d6e0"}} onClick={this.addMoreField} variant="contained">
                             Add more

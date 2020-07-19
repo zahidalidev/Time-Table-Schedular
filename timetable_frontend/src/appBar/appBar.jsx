@@ -31,6 +31,7 @@ class PrimarySearchAppBar extends Component{
    
     renderPagination = () => {
         this.props.onreRednerPagination()
+        window.location.reload(true);
     }
 
     setMarginLeft = () => {

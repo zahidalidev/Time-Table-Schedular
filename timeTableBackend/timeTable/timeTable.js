@@ -208,7 +208,7 @@ router.post('/', async(req, res) => {
     console.log(courses);
     // console.table(allTables[1]);
     res.send(allTables)
-    // allTables = [];
+    allTables = [];
 })
 
 module.exports = router;

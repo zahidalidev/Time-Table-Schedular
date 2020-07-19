@@ -165,13 +165,13 @@ class Teachers extends Component {
 
         return (
             <form noValidate>
-                <Grid container alignItems="center" item xs={12} style={{marginTop: 60, marginLeft: marginLeftTextField * 2}}>
+                <Grid container alignItems="center" item xs={12} style={{marginTop: 60}}>
                     {
                         teachers.map((teacher, i) => {
                             return (
                                 <Grid container key = {i} direction="column" justify="center" alignItems="center" item xs={9} style={{marginTop: 50, marginLeft: marginLeftTextField }}>  
                                     <Grid container direction="row" justify="flex-end" alignItems="center" spacing={4} item sm={12}>                                    
-                                        <Grid container direction="row" justify="flex-end" alignItems="center" item xs={4} style={{paddingLeft: {leftMargin}, paddingRight: marginLeftTextField * -3}}>
+                                        <Grid container direction="row" justify="flex-end" alignItems="center" item xs={4} style={{paddingLeft: {leftMargin}, paddingRight: marginLeftTextField * -3, marginRight: marginLeftTextField * 3.2}}>
                                             <Grid container direction="row" justify="flex-end" alignItems="center" item xs={marginLeftTextField === 0 ? 4 : 1} >
                                                 <Button
                                                     variant="contained"
@@ -199,8 +199,9 @@ class Teachers extends Component {
                                             </Grid>
                                         </Grid>
                                         {teacher[1].map((week, j) => {
+                                            // sm10
                                             return (
-                                                <Grid container key = {j} direction="row" justify="flex-end" alignItems="center" item xs={8}>
+                                                <Grid container key = {j} direction="row" justify="center" alignItems="center" item xs={marginLeftTextField ? 10 : 8}>
                                                     <p style={{marginRight: 20}} >{week[0]}</p>
                                                     <FormControl>
                                                         <Select

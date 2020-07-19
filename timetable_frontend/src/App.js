@@ -60,8 +60,8 @@ class App extends Component {
     }
     console.log(data)
     const table = await generateTableWithPost(data);
-    this.setState({generatedTimeTable: table})
-    console.log("table: ", table)
+    this.setState({generatedTimeTable: table, classRooms: [], classes: [], courses: [], teachers: []})
+    // console.log("table: ", table)
   }
   
   render(){
