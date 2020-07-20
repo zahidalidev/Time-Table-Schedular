@@ -76,7 +76,7 @@ class Courses extends Component {
 
 
     handleChange = (e, i, j) => {
-        const crditHourArray = [[1, 1, 1], [1, 2], [2, 1], [3]];
+        const crditHourArray = [[1, 1, 1], [1, 2], [2, 1], [3], [1, 1], [2], [1]];
 
         const courses = [...this.state.courses]
         const name = e.target.name;
@@ -93,6 +93,8 @@ class Courses extends Component {
         this.sumbitButtonConstraint(courses);
 
         this.checkUniqueArray(courses);
+
+        console.log("courses: ", courses)
     }
 
     addMoreField = () => {
@@ -163,12 +165,18 @@ class Courses extends Component {
                             let crditValue = '';
                             if(course.crHouurs.length === 3){
                                 crditValue = 0;
-                            }else if(course.crHouurs[0] === 1){
+                            }else if(course.crHouurs[0] === 1 && course.crHouurs[1] === 2){
                                 crditValue = 1;
-                            }else if(course.crHouurs[0] === 2){
+                            }else if(course.crHouurs[0] === 2 && course.crHouurs[1] === 1){
                                 crditValue = 2;
                             }else if(course.crHouurs[0] === 3){
                                 crditValue = 3;
+                            }else if(course.crHouurs[0] === 1 && course.crHouurs[1] === 1){
+                                crditValue = 4;
+                            }else if(course.crHouurs[0] === 2){
+                                crditValue = 5;
+                            }else if(course.crHouurs[0] === 1){
+                                crditValue = 6;
                             }
                                 
 
@@ -241,10 +249,14 @@ class Courses extends Component {
                                                 name = "crHouurs"
                                                 onChange={(e) => this.handleChange(e, i)}
                                                 >
-                                                <MenuItem value={0}>1, 1, 1</MenuItem>
-                                                <MenuItem value={1}>1, 2</MenuItem>
-                                                <MenuItem value={2}>2, 1</MenuItem>
-                                                <MenuItem value={3}>3</MenuItem>
+                                                <MenuItem value = {0} >1, 1, 1</MenuItem>
+                                                <MenuItem value = {1} >1, 2</MenuItem>
+                                                <MenuItem value = {2} >2, 1</MenuItem>
+                                                <MenuItem value = {3} >3</MenuItem>
+
+                                                <MenuItem value = {4} >1, 1</MenuItem>
+                                                <MenuItem value = {5} >2</MenuItem>
+                                                <MenuItem value = {6} >1</MenuItem>
                                             </Select>
                                             <FormHelperText>Select Credit Hourse</FormHelperText>
                                         </FormControl>

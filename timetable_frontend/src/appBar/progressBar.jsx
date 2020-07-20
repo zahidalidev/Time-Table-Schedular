@@ -3,10 +3,13 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
-    height: 10,
+    height: 6,
     borderRadius: 5,
     width: '100%',
   },
@@ -26,12 +29,6 @@ const useStylesFacebook = makeStyles((theme) => ({
   bottom: {
     color: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
   },
-  top: {
-    color: '#2a3547',
-    animationDuration: '550ms',
-    position: 'absolute',
-    left: 0,
-  },
   circle: {
     strokeLinecap: 'round',
   },
@@ -39,29 +36,32 @@ const useStylesFacebook = makeStyles((theme) => ({
 
 function FacebookCircularProgress(props) {
   const classes = useStylesFacebook();
-
+  console.log("onononProgressValue: ", props.onononProgressValue)
   return (
     <div className={classes.root}>
-      <CircularProgress
-        variant="determinate"
-        className={classes.bottom}
-        size={40}
-        thickness={4}
+      <Box position="relative" display="inline-flex">
+        <CircularProgress
+          variant = {(props.onononProgressValue === 0 || props.onononProgressValue === 100) ? "static" : "indeterminate"}
+          style={{color: '#2a3547', animationDuration: '550ms'}}
+          value={props.onononProgressValue}
         {...props}
-        value={100}
+        
         />
-      <CircularProgress
-        variant="indeterminate"
-        disableShrink
-        className={classes.top}
-        classes={{
-          circle: classes.circle,
-        }}
-        size={40}
-        thickness={4}
-        {...props}
-      />
-      {/* <span style={{marginLeft: 24}} >Creating...</span> */}
+        <Box
+          top={0}
+          left={0}
+          bottom={0}
+          right={0}
+          position="absolute"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Typography variant="caption" component="div" color="textSecondary">{`${Math.round(
+            props.onononProgressValue,
+          )}%`}</Typography>
+        </Box>
+      </Box>
     </div>
   );
 }
@@ -69,45 +69,15 @@ function FacebookCircularProgress(props) {
 
 
 export default function ProgressBars({ononProgressValue}) {
-    // var oldURL = "";
-    // var currentURL = window.location.href;
-    // const checkURLchange = (currentURL) => {
 
-    //     if(currentURL != oldURL){
-    //         const pathNew = window.location.pathname.substr(6);
-    //         if(pathNew === "classrooms"){
-    //             ProgressValue = 0;
-    //         }else if(pathNew === "classes"){
-    //             ProgressValue = 25;
-    //         }else if(pathNew === "teachers"){
-    //             ProgressValue = 50;
-    //         }else if(pathNew === "courses"){
-    //             ProgressValue = 75
-    //         }else if(pathNew === "table"){
-    //             ProgressValue = 100
-    //         }
-
-    //         oldURL = currentURL;
-    //     }
-
-    //     oldURL = window.location.href;
-    //     setInterval(function() {
-    //         checkURLchange(window.location.href);
-    //     }, 1000);
-
-    // }
-
-    // checkURLchange();
   return (
     <div className style={{flexGrow: 1}}>
       <form noValidate>
         <Grid container direction="row" item sm={12} >
           <Grid container direction="row" item sm={1} >
-            <FacebookCircularProgress />
+            <FacebookCircularProgress onononProgressValue = {ononProgressValue} />
           </Grid>
           <Grid container direction="row" item sm={11} style={{paddingLeft: 5, marginTop: 15}} >
-
-          {/* <br /> */}
             <BorderLinearProgress variant="determinate" value={ononProgressValue} />
           </Grid>
         </Grid>
