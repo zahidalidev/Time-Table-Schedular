@@ -9,7 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
   root: {
@@ -25,7 +26,13 @@ const styles = theme => ({
     // paddingRight: 4,
     // paddingLeft: 5
     fontSize: "11px !important"
-  }
+  },
+  circleRoot: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    },
+  },
 });
 
 let id = 0;
@@ -42,9 +49,11 @@ class TimeTable extends Component {
         textSize: "14px",
         leftPadding: "16px",
         rightPadding: "16px",
+        showLoader: false
     }
 
     generateTable = () => {
+        this.setState({showLoader: true})
         this.props.onGenerateTable();
     }
 
@@ -77,7 +86,23 @@ class TimeTable extends Component {
 
     render(){ 
         const {onGeneratedTimeTable: timeTables} = this.props; 
-        const {textSize, leftPadding, rightPadding} = this.state;
+        const {textSize, leftPadding, rightPadding, showLoader} = this.state;
+        
+        if(timeTables.length === 0 && showLoader){
+            return (
+                <React.Fragment style={{marginTop: 200}}>
+                    <Grid container direction="row" justify="center" alignItems="center" item xs={12}>
+                            <Button style={{backgroundColor: "#2a3547", color: "#d0d6e0", marginTop: 50}} color="primary" onClick={this.generateTable}>Generate Table</Button>
+                    </Grid>
+                    <Grid container direction="row" justify="center" alignItems="center" item xs={12} style={{marginTop: 150}}>
+                        <div className={styles.circleRoot}>
+                            <CircularProgress />
+                        </div>
+                    </Grid>
+                </React.Fragment>
+            );
+        }
+
 
         return (
             <React.Fragment style={{marginTop: 200}}>
