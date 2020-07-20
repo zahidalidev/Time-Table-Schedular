@@ -8,8 +8,6 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
-import Divider from '@material-ui/core/Divider';
-import {Link} from 'react-router-dom';
 import {toast} from "react-toastify";
 
 const CssTextField = withStyles({
@@ -115,6 +113,7 @@ class Courses extends Component {
         })
         console.log(courses)
         this.props.onCourses(courses);
+        this.props.history.push("/home/table");
     }
 
     handleRemove = (i) => {
@@ -292,7 +291,7 @@ class Courses extends Component {
                         onClick = {this.handleSubmit}
                         disabled = {buttonDisabled}
                     >
-                        <Link style={{color: buttonDisabled ? "#c0cad8" : "#d0d6e0", textDecoration: 'none'}} to = "/home/table" >Submit and Next</Link>
+                    Submit and Next
                     </Button>
                 </Grid>
             </form>

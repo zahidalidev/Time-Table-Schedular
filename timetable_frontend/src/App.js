@@ -78,7 +78,7 @@ class App extends Component {
   
   render(){
     const {teachersName, sessionsName, generatedTimeTable, progressValue} = this.state;
-
+    
     return (
       <div className="App">
         {/* toastify container */}

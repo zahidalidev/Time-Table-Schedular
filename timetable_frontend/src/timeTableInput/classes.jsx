@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import SendIcon from '@material-ui/icons/Send';
-import {Link} from 'react-router-dom';
 import {toast} from "react-toastify";
 
 const CssTextField = withStyles({
@@ -105,6 +104,7 @@ class Classes extends Component {
         })
 
         this.props.onClasses(classesArray);
+        this.props.history.push("/home/teachers")
     }
 
     handleRemove = (i) => {
@@ -210,7 +210,7 @@ class Classes extends Component {
                         onClick = {this.handleSubmit}
                         disabled = {buttonDisabled}
                     >
-                        <Link style={{color: buttonDisabled ? "#c0cad8" : "#d0d6e0", textDecoration: 'none'}} to = "/home/teachers" >Submit and Next</Link>
+                        Submit and Next
                     </Button>
                 </Grid>
             </form>
