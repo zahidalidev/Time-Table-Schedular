@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import SendIcon from '@material-ui/icons/Send';
 import {Link} from 'react-router-dom';
+import {toast} from "react-toastify";
 
 const CssTextField = withStyles({
   root: {
@@ -60,7 +61,7 @@ class ClassRooms extends Component {
         let hasDuplicate = singleArray.some((val, i) => singleArray.indexOf(val) !== i);
         if(hasDuplicate){
             this.setState({buttonDisabled: true})
-            alert('please enter unique name')
+            toast.error("please enter unique name");
         }
     }
 
@@ -112,7 +113,7 @@ class ClassRooms extends Component {
             rooms.splice(i, 1);
             this.setState({rooms});
         }else{
-            alert("Enter the Name of Atleast one Room")
+            toast.error("Enter the Name of Atleast one Room")
         }
 
         this.sumbitButtonCOnstraint(rooms)

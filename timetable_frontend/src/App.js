@@ -12,6 +12,9 @@ import TimeTable from "./timeTableOutput/timeTable";
 import {generateTableWithPost} from "./http/api";
 import Footer from "./footer/footer";
 
+import {ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
+
 class App extends Component {
 
   state = {
@@ -58,10 +61,19 @@ class App extends Component {
       courses: this.state.courses,
       teachers: this.state.teachers
     }
-    console.log(data)
-    const table = await generateTableWithPost(data);
-    this.setState({generatedTimeTable: table, classRooms: [], classes: [], courses: [], teachers: []})
-    // console.log("table: ", table)
+    // console.log(data)
+
+    try {
+      const table = await generateTableWithPost(data);
+      this.setState({generatedTimeTable: table, classRooms: [], classes: [], courses: [], teachers: []})
+
+      if(table.length === 0){
+        toast.error("Table Generate Error input fields are empty",);
+      }
+
+    } catch (error) {
+      toast.error("Table Generate Error: " + error.message);
+    }
   }
   
   render(){
@@ -69,6 +81,9 @@ class App extends Component {
 
     return (
       <div className="App">
+        {/* toastify container */}
+        <ToastContainer autoClose={5000} position={toast.POSITION.TOP_RIGHT} />
+        
         <Pagination onProgressValue = {progressValue} />
         
         <Switch>

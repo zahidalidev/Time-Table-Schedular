@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import SendIcon from '@material-ui/icons/Send';
 import {Link} from 'react-router-dom';
+import {toast} from "react-toastify";
 
 const CssTextField = withStyles({
   root: {
@@ -61,7 +62,7 @@ class Classes extends Component {
         let hasDuplicate = singleArray.some((val, i) => singleArray.indexOf(val) !== i);
         if(hasDuplicate){
             this.setState({buttonDisabled: true})
-            alert('please enter unique name')
+            toast.error('please enter unique name')
         }
     }
 
@@ -113,7 +114,7 @@ class Classes extends Component {
             classes.splice(i, 1);
             this.setState({classes});
         }else{
-            alert("Enter the Name of Atleast one Class")
+            toast.error("Enter the Name of Atleast one Class")
         }
 
         this.sumbitButtonConstraint(classes);

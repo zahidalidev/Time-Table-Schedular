@@ -10,6 +10,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Divider from '@material-ui/core/Divider';
 import {Link} from 'react-router-dom';
+import {toast} from "react-toastify";
 
 const CssTextField = withStyles({
   root: {
@@ -74,7 +75,7 @@ class Teachers extends Component {
         let hasDuplicate = singleArray.some((val, i) => singleArray.indexOf(val) !== i);
         if(hasDuplicate){
             this.setState({buttonDisabled: true})
-            alert('please enter unique name')
+            toast.error('please enter unique name')
         }
     }
 
@@ -123,7 +124,7 @@ class Teachers extends Component {
             teachers.splice(i, 1);
             this.setState({teachers});
         }else{
-            alert("Add atleast one teacher!")
+            toast.error("Add atleast one teacher!")
         }
 
         this.sumbitButtonConstraint(teachers);
