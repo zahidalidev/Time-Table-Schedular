@@ -65,7 +65,8 @@ class App extends Component {
 
     try {
       const table = await generateTableWithPost(data);
-      this.setState({generatedTimeTable: table, classRooms: [], classes: [], courses: [], teachers: []})
+      // this.setState({generatedTimeTable: table, classRooms: [], classes: [], courses: [], teachers: []})
+      this.setState({generatedTimeTable: table})
 
       if(table.length === 0){
         toast.error("Table Generate Error input fields are empty",);

@@ -41,7 +41,8 @@ function FacebookCircularProgress(props) {
     <div className={classes.root}>
       <Box position="relative" display="inline-flex">
         <CircularProgress
-          variant = {(props.onononProgressValue === 0 || props.onononProgressValue === 100) ? "static" : "indeterminate"}
+          variant = "static"
+          // variant = {(props.onononProgressValue === 0 || props.onononProgressValue === 100) ? "static" : "indeterminate"}
           style={{color: '#2a3547', animationDuration: '550ms'}}
           value={props.onononProgressValue}
         {...props}

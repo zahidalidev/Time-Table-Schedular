@@ -43,13 +43,13 @@ checkTeacher = (currentCourse, i, j, cr) => {
         return [false];
         // return [true, 1];
     }
-
+    
     for(let t = 0; t < teachers.length; t++){
         
         if(currentCourse.teacher === teachers[t][0]){
             let tHour = j;
             for(let l = 0; l < currentCourse.crHouurs[cr]; l++){
-
+                
                 if(teachers[t][1][i][tHour] == 0){
                     tHour++;
                 }else{
@@ -57,6 +57,7 @@ checkTeacher = (currentCourse, i, j, cr) => {
                     // return [true, t];
                 }
                 if(l == currentCourse.crHouurs[cr] - 1){
+                    // console.log(i, tHour , currentCourse.crHouurs[cr])
                     return [true, t];
                 }
             }
@@ -64,7 +65,52 @@ checkTeacher = (currentCourse, i, j, cr) => {
     }
 }
 
-checkCourse = (currentCourse, i, j, cr, cls) => {
+
+checkClassRoom = (currentCourse, i, j, cr, cl) => {
+    let clHour = j;
+    for(let l = 0; l < currentCourse.crHouurs[cr]; l++){
+        if(classRooms[cl][1][i][clHour] == 0){
+            clHour++;
+        }else{
+            return false;
+        }
+        if(l == currentCourse.crHouurs[cr] - 1){
+            return true;
+        }
+    }
+}
+
+checkClasses = (currentCourse, i, j, cr, cls) => {
+    let clHour = j;
+    for(let l = 0; l < currentCourse.crHouurs[cr]; l++){
+        if((classes[cls][1][i][clHour] == 0)){
+            clHour++;
+        }else{
+            return false;
+        }
+        if(l == currentCourse.crHouurs[cr] - 1){
+            return true;
+        }
+    }
+}
+
+checkTimeTable = (currentCourse, i, j, cr) => {
+    let clHour = j;
+    for(let l = 0; l < currentCourse.crHouurs[cr]; l++){
+        
+        if((timeTable[i][clHour] == 0)){
+            clHour++;
+        }else{
+            return false;
+        }
+        if(l == currentCourse.crHouurs[cr] - 1){
+            return true;
+        }
+    }
+}
+
+
+checkCourse = (currentCourse, i, j, cr, cls, cl) => {
     let count = 0;
 
     if (currentCourse.crHouurs[cr] == 3 && j >=  6){
@@ -83,8 +129,20 @@ checkCourse = (currentCourse, i, j, cr, cls) => {
     if (chTeacher[0]){
         count++;
     }
+    // console.log(chTeacher[0])
+    if(checkClassRoom(currentCourse, i, j, cr, cl)){
+        count++
+    }
 
-    if (count == 2)
+    if(checkClasses(currentCourse, i, j, cr, cls)){
+        count++
+    }
+
+    if(checkTimeTable(currentCourse, i, j, cr)){
+        count++
+    }
+
+    if (count == 5)
         return chTeacher;
 
     return [false];
@@ -112,11 +170,12 @@ generateTimeTable = () => {
                                 j = 1;
                             }
                             
-                            let chCourse = checkCourse(courses[y], i, j, 0, cls);
+                            let chCourse = checkCourse(courses[y], i, j, 0, cls, cl);
+                            // console.log("timeTable-1: " + courses[y].name + " : " + chCourse[0] +": " +timeTable[i][j], classRooms[cl][1][i][j], classes[cls][1][i][j] );
                             
                             if (chCourse[0]){
-
                                 for(let m = 0; m < courses[y].crHouurs[0]; m++){
+
 
                                     timeTable[i][j] = courses[y].name + ', ' + courses[y].teacher + ', ' + classRooms[cl][0];
                                     classRooms[cl][1][i][j] = 1;
@@ -129,12 +188,10 @@ generateTimeTable = () => {
                                 
                                 if(courses[y].crHouurs.length == 0){
                                     courses.splice(y, 1)     //removing course if its all credit hours is used
-                                    console.log('y1', y)
                                 }
                                 
                             }else{
                                 y++;
-                                console.log('y2: ', y)
                             }
                         }
                         
@@ -149,9 +206,7 @@ generateTimeTable = () => {
             for (var k = 0; k < timeTable.length; k++) {
                 table[k] = timeTable[k].slice();    //to copy array by value
             }
-            // console.log(classes[cls][0], classRooms[cl][0])
-            // console.table(table)
-            //sessions(class) wise table 
+            
             for(let ta = 0; ta < allTables.length || allTables.length == 0; ta++){
                 if(allTables.length != 0){
                     
@@ -203,10 +258,8 @@ router.post('/', async(req, res) => {
     classes = req.body.classes;
     courses = req.body.courses;
     teachers = req.body.teachers;
-    console.log("called")
     generateTimeTable();
     console.log(courses);
-    // console.table(allTables[1]);
     res.send(allTables)
     allTables = [];
 })
