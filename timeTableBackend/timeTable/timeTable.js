@@ -10,6 +10,12 @@ let timeTable = [
     ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
+
+
+
+
+
+
 let classRooms = [
     [[[],[],[],[],[],]],
     [[[],[],[],[],[],]],
@@ -112,6 +118,7 @@ checkTimeTable = (currentCourse, i, j, cr) => {
 
 checkCourse = (currentCourse, i, j, cr, cls, cl) => {
     let count = 0;
+    
 
     if (currentCourse.crHouurs[cr] == 3 && j >=  6){
         count--;
@@ -124,26 +131,29 @@ checkCourse = (currentCourse, i, j, cr, cls, cl) => {
     if(classes[cls][0] == currentCourse.session){
         count++;
     }
-
+    
+    
     let chTeacher = checkTeacher(currentCourse, i, j, cr);
+
     if (chTeacher[0]){
         count++;
     }
-    // console.log(chTeacher[0])
+    
     if(checkClassRoom(currentCourse, i, j, cr, cl)){
         count++
     }
-
+    
     if(checkClasses(currentCourse, i, j, cr, cls)){
         count++
     }
-
+    
     if(checkTimeTable(currentCourse, i, j, cr)){
         count++
     }
-
-    if (count == 5)
+    
+    if (count == 5){
         return chTeacher;
+    }
 
     return [false];
 }
@@ -161,7 +171,7 @@ generateTimeTable = () => {
                 let j = 1;
                 let jCouunt = 0;
                 while(j < hoursPerDay ){
-
+                    
                     if((timeTable[i][j] == 0) && (classRooms[cl][1][i][j] == 0) && (classes[cls][1][i][j] == 0)) {
                         
                         let y = 0;
@@ -169,13 +179,11 @@ generateTimeTable = () => {
                             if(j === hoursPerDay){
                                 j = 1;
                             }
-                            
                             let chCourse = checkCourse(courses[y], i, j, 0, cls, cl);
-                            // console.log("timeTable-1: " + courses[y].name + " : " + chCourse[0] +": " +timeTable[i][j], classRooms[cl][1][i][j], classes[cls][1][i][j] );
                             
                             if (chCourse[0]){
+                                
                                 for(let m = 0; m < courses[y].crHouurs[0]; m++){
-
 
                                     timeTable[i][j] = courses[y].name + ', ' + courses[y].teacher + ', ' + classRooms[cl][0];
                                     classRooms[cl][1][i][j] = 1;
@@ -195,10 +203,10 @@ generateTimeTable = () => {
                             }
                         }
                         
+                        j++;
                     }else{
                         j++;
                     }
-                    j++;
                 }
             }
            
