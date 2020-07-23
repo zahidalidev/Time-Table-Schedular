@@ -108,11 +108,11 @@ class App extends Component {
             : null
           }
 
-          {
+          <Route path = "/home/table" exact render = {(props) => <TimeTable {...props} onGenerateTable = {this.generateTable} onGeneratedTimeTable = {generatedTimeTable} />} />
+          {/* {
             progressValue === 100 ? 
-            <Route path = "/home/table" exact render = {(props) => <TimeTable {...props} onGenerateTable = {this.generateTable} onGeneratedTimeTable = {generatedTimeTable} />} />
             : null
-          }
+          } */}
           <Redirect to="/home/classrooms" />
         </Switch>
         <Footer />

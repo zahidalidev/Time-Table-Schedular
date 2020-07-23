@@ -12,6 +12,10 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import jsPDF from "jspdf";
+// import html2canvas from "html2canvas";
+import html2canvas from "html2canvas-render-offscreen" 
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -84,6 +88,18 @@ class TimeTable extends Component {
         // console.log(this.state.width)
     }
 
+    pdfTable = async(className, i) => {
+        const element = document.getElementById(`tableId${i}`);
+      
+        let canvas = await html2canvas(element)
+        
+        let imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        pdf.addImage(imgData, 'PNG', 0, 20);
+        pdf.save(`${className}.pdf`);  
+        
+    }
+
     render(){ 
         const {onGeneratedTimeTable: timeTables} = this.props; 
         const {textSize, leftPadding, rightPadding, showLoader} = this.state;
@@ -113,8 +129,13 @@ class TimeTable extends Component {
                         {timeTables.map((table, i) => {
                             return (
                                     <Grid container direction="col" justify="center" alignItems="center" item xs={8}>
-                                        <Paper className={styles.root}>
-                                            <h4 style={{marginTop: "54px", marginBottom: "58px", color: "#202d42"}}>CLass Name: <span style={{color: "#0f9ac4"}}>{table[0]}</span></h4>
+                                        
+                                        <Grid container direction="row" justify="center" alignItems="center" item xs={12}>
+                                            <Button style={{backgroundColor: "#0f9ac4", color: "white", marginTop: 50}} color="primary" onClick={() => this.pdfTable(table[0], i)}>Download table for {table[0]}</Button>
+                                        </Grid>
+                                        
+                                        <Paper id={`tableId${i}`} className={styles.root}>
+                                            <h4 style={{marginTop: "54px", marginBottom: "58px", color: "#202d42"}}>Class Name: <span style={{color: "#0f9ac4"}}>{table[0]}</span></h4>
                                             <Table className={styles.table}>
                                                 <TableHead style={{backgroundColor: "#202d42"}}>
                                                     <TableRow>
