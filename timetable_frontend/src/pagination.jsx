@@ -63,7 +63,7 @@ class Pagination extends Component{
         return(
             <div>
                 <PrimarySearchAppBar onreRednerPagination = {this.reRednerPagination} />
-                <form noValidate>
+                <form noValidate >
                     <Grid container style={{marginTop: 100}} direction="col" justify="center" alignItems="center" item sm={12} >
                         <Grid container direction="row" justify="center" alignItems="center" item sm={6} >
                             <ProgressBars ononProgressValue = {progressValue ? this.props.onProgressValue : progressValue} />

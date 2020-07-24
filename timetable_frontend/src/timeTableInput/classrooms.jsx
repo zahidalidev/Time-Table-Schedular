@@ -16,10 +16,10 @@ const CssTextField = withStyles({
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: 'red',
+        borderColor: '#0f9ac4',
       },
       '&:hover fieldset': {
-        borderColor: 'yellow',
+        borderColor: '#202d42',
       },
       '&.Mui-focused fieldset': {
         borderColor: 'green',
@@ -154,7 +154,7 @@ class ClassRooms extends Component {
         const {rooms, buttonDisabled} = this.state;
 
         return (
-            <form noValidate>
+            <form noValidate >
                 <Grid container row alignItems="center" item xs={12} style={{marginTop: 60}}>
                     {
                         rooms.map((room, i) => {
@@ -165,6 +165,7 @@ class ClassRooms extends Component {
                                             variant="contained"
                                             color="secondary"
                                             onClick = {() => this.handleRemove(i)}
+                                            style={{backgroundColor: "#0f9ac4"}}
                                         >
                                             X
                                         </Button>

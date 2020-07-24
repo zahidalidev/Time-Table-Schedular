@@ -10,10 +10,11 @@ import Teachers from "./timeTableInput/teachers";
 import Courses from "./timeTableInput/courses";
 import TimeTable from "./timeTableOutput/timeTable";
 import {generateTableWithPost} from "./http/api";
-import Footer from "./footer/footer";
+import Footer2 from "./footer/footer2";
 
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
+
 
 class App extends Component {
 
@@ -65,7 +66,6 @@ class App extends Component {
 
     try {
       const table = await generateTableWithPost(data);
-      // this.setState({generatedTimeTable: table, classRooms: [], classes: [], courses: [], teachers: []})
       this.setState({generatedTimeTable: table, classRooms: [], classes: [], courses: [], teachers: []})
 
       if(table.length === 0){
@@ -81,41 +81,40 @@ class App extends Component {
     const {teachersName, sessionsName, generatedTimeTable, progressValue} = this.state;
     
     return (
-      <div className="App">
+       <div className="App">
         {/* toastify container */}
         <ToastContainer autoClose={5000} position={toast.POSITION.TOP_RIGHT} />
-        
-        <Pagination onProgressValue = {progressValue} />
-        
-        <Switch>
-          <Route path = "/home/classrooms" exact render = {(props) => < ClassRooms {...props} onClassRooms = {this.handleClassRooms} />} />
+          <Pagination onProgressValue = {progressValue} />
           
-          {
-            progressValue === 25 ? 
-            <Route path = "/home/classes" exact render={(props) => < Classes {...props} onClasses = {this.handleClasses} />} />
-            : null
-          }
+          <Switch>
+            <Route path = "/home/classrooms" exact render = {(props) => < ClassRooms {...props} onClassRooms = {this.handleClassRooms} />} />
+            
+            {
+              progressValue === 25 ? 
+              <Route path = "/home/classes" exact render={(props) => < Classes {...props} onClasses = {this.handleClasses} />} />
+              : null
+            }
 
-          {
-            progressValue === 50 ? 
-            <Route path = "/home/teachers" exact render = {(props) => <Teachers {...props} onHandleTeachers = {this.handleTeachers} />} />
-            : null
-          }
-          
-          {
-            progressValue === 75 ? 
-            <Route path = "/home/courses" exact render = {(props) => <Courses {...props} onTeachersName = {teachersName} onSessionsName = {sessionsName} onCourses = {this.handelCourses} />} />
-            : null
-          }
+            {
+              progressValue === 50 ? 
+              <Route path = "/home/teachers" exact render = {(props) => <Teachers {...props} onHandleTeachers = {this.handleTeachers} />} />
+              : null
+            }
+            
+            {
+              progressValue === 75 ? 
+              <Route path = "/home/courses" exact render = {(props) => <Courses {...props} onTeachersName = {teachersName} onSessionsName = {sessionsName} onCourses = {this.handelCourses} />} />
+              : null
+            }
 
-          <Route path = "/home/table" exact render = {(props) => <TimeTable {...props} onGenerateTable = {this.generateTable} onGeneratedTimeTable = {generatedTimeTable} />} />
-          {/* {
-            progressValue === 100 ? 
-            : null
-          } */}
-          <Redirect to="/home/classrooms" />
-        </Switch>
-        <Footer />
+            {
+              progressValue === 100 ? 
+              <Route path = "/home/table" exact render = {(props) => <TimeTable {...props} onGenerateTable = {this.generateTable} onGeneratedTimeTable = {generatedTimeTable} />} />
+              : null
+            }
+            <Redirect to="/home/classrooms" />
+          </Switch>
+        <Footer2 />
       </div>
     );
   }

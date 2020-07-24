@@ -21,10 +21,10 @@ const CssTextField = withStyles({
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: 'red',
+        borderColor: '#0f9ac4',
       },
       '&:hover fieldset': {
-        borderColor: 'yellow',
+        borderColor: '#202d42',
       },
       '&.Mui-focused fieldset': {
         borderColor: 'green',
@@ -167,6 +167,9 @@ class Teachers extends Component {
         return (
             <form noValidate>
                 <Grid container alignItems="center" item xs={12} style={{marginTop: 60}}>
+                    <Grid container direction="row" justify="center" alignItems="center" item xs={12} style={{marginTop: 50, marginBottom: 0 }}>  
+                         <p><span style={{color: "red"}}>*</span>Select <span style={{color: "red"}}>"0"</span> if teacher is available and <span style={{color: "red"}}>"1"</span> if teacher is busy in below time slots</p>
+                    </Grid>
                     {
                         teachers.map((teacher, i) => {
                             return (
@@ -178,7 +181,7 @@ class Teachers extends Component {
                                                     variant="contained"
                                                     color="secondary"
                                                     onClick = {() => this.handleRemove(i)}
-                                                    style={{marginRight: 20}}
+                                                    style={{marginRight: 20, backgroundColor: "#0f9ac4"}}
                                                 >
                                                     X
                                                 </Button>
