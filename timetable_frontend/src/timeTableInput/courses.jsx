@@ -93,7 +93,6 @@ class Courses extends Component {
 
         this.checkUniqueArray(courses);
 
-        console.log("courses: ", courses)
     }
 
     addMoreField = () => {
@@ -111,7 +110,16 @@ class Courses extends Component {
                 courses.splice(i, 1);
             }
         })
-        console.log(courses)
+        
+        for(let i = 1; i < courses.length; ++i){
+            for(let j = 0; j < (courses.length - i); ++j)
+                if(courses[j].crHouurs[0] < courses[j+1].crHouurs[0]){
+                    
+                    let temp = courses[j];
+                    courses[j] = courses[j+1];
+                    courses[j+1] = temp;
+                }
+        }
         this.props.onCourses(courses);
         this.props.history.push("/home/table");
     }
