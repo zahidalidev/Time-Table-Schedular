@@ -71,13 +71,13 @@ class Footer2 extends Component{
                                 <a className="text-white" target="_blank" href="https://covid19.mrfixer.pk/">COVID-19 Statistics</a>
                                 </p>
                                 <p>
-                                <a className="text-white" target="_blank" href="https://mrfixer.pk/">mrfixer.pk</a>
+                                <a className="text-white" target="_blank" href="https://github.com/zahidalidev/webshot-chrom-extension">WebShot Chrome Extension</a>
                                 </p>
                                 <p>
                                 <a className="text-white" target="_blank" href="https://github.com/zahidalidev/github-star-cli">Github Star CLI</a>
                                 </p>
                                 <p>
-                                <a className="text-white" target="_blank" href="https://github.com/zahidalidev/Bracket-Checker">Bracket Checker</a>
+                                <a className="text-white" target="_blank" href="https://github.com/zahidalidev/parenthesis-error-line-detector-cpp">Parenthesis Error Detector</a>
                                 </p>
                                 
                             </div>
@@ -85,7 +85,7 @@ class Footer2 extends Component{
                                 <h6 className = "text-uppercase font-weight-bold">Useful links</h6>
                                 <hr style={{backgroundColor: "#0f9ac4", width: "60px"}} className = "accent-2 col-md-4 mt-0 d-inline-block mx-auto" />
                                 <p>
-                                <a className="text-white" target="_blank" href="#!">Account</a>
+                                <a className="text-white" target="_blank" href="https://mrfixer.pk/">mrfixer.pk</a>
                                 </p>
                                 <p>
                                 <a className="text-white" target="_blank" href="#!">Account</a>

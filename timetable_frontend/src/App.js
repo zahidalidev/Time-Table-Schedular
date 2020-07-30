@@ -8,7 +8,8 @@ import Classes from "./timeTableInput/classes";
 import ClassRooms from "./timeTableInput/classrooms";
 import Teachers from "./timeTableInput/teachers";
 import Courses from "./timeTableInput/courses";
-import TimeTable from "./timeTableOutput/timeTable";
+// import TimeTable from "./timeTableOutput/timeTable";
+import TimeTable from "./timeTableOutput/tableDesign2";
 import {generateTableWithPost} from "./http/api";
 import Footer2 from "./footer/footer2";
 
