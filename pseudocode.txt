@@ -1,59 +1,118 @@
 
-checkTeacher(course, teacher, i, j) 
-   if(teacher[i][j].course == course)
-      if(teacher[i][j].hours != 0)
-         return true
-   return false
+//function to check the teacher for particular course in particular hourse is available 
+checkTeacher(currentCourse, i, j, cr)
+    if currentCourse.crHouurs[cr] == 0 or currentCourse.crHouurs.length == 0
+        return [false]
 
-checkCourse (course, i, j, teacher) 
+    for t = 0 to teachers.length
+        if currentCourse.teacher == teachers[t][0]
+             //checking teacher for all credit hourse of course is available
+            tHour = j
+            for let l = 0 to currentCourse.crHouurs[cr]
+                if teachers[t][1][i][tHour] == 0
+                    tHour++
+                else
+                    return [false]
+                if l == currentCourse.crHouurs[cr] - 1
+                    return [true, t]   //returning index of teacher and true if teacher is available
 
-   if (course.crHours == 3 and j >=  6)
-      count++
 
-   if (course.crHours == 2 and j >=  7)
-      count++
+checkClassRoom(currentCourse, i, j, cr, cl)
+   //checking class room for all credit hourse of course is available
+    clHour = j    
+    for l = 0 to currentCourse.crHouurs[cr]
+        if classRooms[cl][1][i][clHour] == 0
+            clHour++
+        else
+            return false
+        if l == currentCourse.crHouurs[cr] - 1
+            return true
 
-   if (checkTeacher(course, teacher, i, j)
-      count++
+
+checkCourse(currentCourse, i, j, cr, cls, cl)
+    count = 0
+
+    if currentCourse.crHouurs[cr] == 3 and j >=  6    //if redit of course is greater then available hourse then course should not be allocate
+        count--
+
+    if currentCourse.crHouurs[cr] == 2 and j >=  7    //if redit of course is greater then available hourse then course should not be allocate
+        count--
+
+    if classes[cls][0] == currentCourse.session    //if class is available for current course
+        count++
     
-   if (count == 3)
-      return TRUE
+    chTeacher = checkTeacher(currentCourse, i, j, cr)
 
-   return FALSE
+    if chTeacher[0] is true      //if teacher is available making count increase
+        count++
+    
+    if checkClassRoom(currentCourse, i, j, cr, cl)    //if class room available count increase
+        count++
+        
+    if count == 3    //if all resources available then chTeacher with teacher index and true
+        return chTeacher
 
-generateTimetable ()
-   for(tc = 1 to totalRooms)
-       for(hpd = 1 to hoursPerDay)
-           classRooms[tc][hpd] = 0
+    return [false]
 
-   for(cl = 1 to totalRooms)
-       for(cls = 1 to classes)
-           currentClass = classes[cls]  
-	   for i = 1 to daysPerWeek  //5
-	       y = 1
-               currentCourse = courses[y]
-               cr = 1
-               j = 1
-	       While j <=  hoursPerDay //8 (e.g., 8AM-4PM)
-                    crHours[] = currentCourse.crHours
-			
-		    if(timeTable[i][j] == 0 and classRooms[cl][j] == 0 and currentClass[i][j] == 0)
- 			 
-			if (checkCourse(currentCourse, i, j, teacher))
-      
-			     for(m = 1 to crHours[cr])
-				 timeTable[i][ j] = currentCourse
-				 classRooms[cl][j] = 1
-				 currentClass[i][j] = 1
-				 j++
-				 teacher[i][j].hours = 0
-			     currentCourse.crHours.removeIndex(cr)   //removing index of crHours array
-			else
-			     y++
-			     if (y <=  totalCourse)
-			         currentCourse = courses[y]
-		
-           print (timeTable)                             
-           for(i = 1 to daysPerWeek )
-      	       for(j = 1 to hoursPerDay)
-            	   timeTable[i][j] = 0
+
+generateTimeTable()
+    cl = 0
+    while cl < classRooms.length 
+        for cls = 0 to < classes.length
+            for i = 0 to daysPerWeek
+                j = 1
+                while j < hoursPerDay
+
+                     //if time table, class room and class mean all have time slots available
+                    if timeTable[i][j] == 0 and classRooms[cl][1][i][j] == 0 and classes[cls][1][i][j] == 0
+                        y = 0
+                        while y < courses.length   //checking for courses on every hour of the day so that can be alloted
+                            if j === hoursPerDay
+                                j = 1
+                            chCourse = checkCourse(courses[y], i, j, 0, cls, cl)    //if course is avaible mean course have teacehr for all its current credit hourse
+                            
+                            if chCourse[0] is true
+                                for m = 0 to courses[y].crHouurs[0]     //making bussy to all slots until credit hourse and allocating course
+                                    timeTable[i][j] = courses[y].name + ', ' + courses[y].teacher + ', ' + classRooms[cl][0]
+                                    classRooms[cl][1][i][j] = 1
+                                    classes[cls][1][i][j] = 1
+                                    teachers[chCourse[1]][1][i][j] = 1
+                                    j++
+
+                                courses[y].crHouurs.splice(0, 1);         //removing credit taht are used
+                                
+                                if courses[y].crHouurs.length == 0
+                                    courses.splice(y, 1)     //removing course if its all its credit hours is used so length of course array will be less by 1
+                            else
+                                y++ 
+                        j++
+                    else
+                        j++;
+                    
+         //pushing current session table to allTable array ant making him empty
+            let table[k] = timeTable[k]    //to copy array by value
+            for ta = 0 to allTables.length or allTables.length == 0
+                if allTables.length != 0 
+                    if classes[cls][0] == allTables[ta][0]
+                        for dpw = 0 to dpw < daysPerWeek
+                            for hpd = 1 to hoursPerDay
+                                if allTables[ta][2][dpw][hpd] == 0 and table[dpw][hpd] != 0  //if allTable slots is free and time table slot is buusy then copy that slot to allTable
+                                    allTables[ta][2][dpw][hpd] = table[dpw][hpd]
+
+                    else if allTables[ta][1] == classRooms[cl][0]
+                        count = 0
+                        for s = 0 to allTables.length
+                            if allTables[s][0] == classes[cls][0]
+                                count++
+                            
+                        if count == 0
+                            allTables.push([classes[cls][0], classRooms[cl][0], table])      //pushing current room name, class name and table to all table array
+
+                else    
+                    allTables.push([classes[cls][0], classRooms[cl][0], table])     //pushing current room name, class name and table to all table array
+                
+            //freeing timrTable for furthor use
+            for o = 0 to < daysPerWeek
+                for p = 1 to hoursPerDay
+                    timeTable[o][p] = 0
+        cl++
