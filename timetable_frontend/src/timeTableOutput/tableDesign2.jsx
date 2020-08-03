@@ -22,8 +22,8 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import Popup from "reactjs-popup";
-// import html2canvas from "html2canvas-render-offscreen" 
 
+// styling for circular progress bar
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -35,8 +35,6 @@ const styles = theme => ({
 
   },
   tableCell: {
-    // paddingRight: 4,
-    // paddingLeft: 5
     fontSize: "11px !important"
   },
   circleRoot: {
@@ -55,55 +53,52 @@ const styles = theme => ({
 
 class TimeTable extends Component {
     
+  // to handle loader and image saving conditionally
     state = {
         showLoader: false,
         saving: true
     }
 
+    // this method will be called when generate table button is clicked 
     generateTable = () => {
-        this.setState({showLoader: true})
-        this.props.onGenerateTable();
+        this.setState({showLoader: true}) 
+        this.props.onGenerateTable();     //calling method from parent component that is App to send and receive data from backend
     }
 
-    setMarginLeft = () => {
-        if(window.innerWidth <= 700){
-            this.setState({textSize: "10px", leftPadding: "5px", rightPadding: "2px"})
-        }else{
-            this.setState({textSize: "14px", leftPadding: "16px", rightPadding: "16px"})
-        }
-    }
 
-    pdfTable = async(className, i) => {
-      this.setState({saving: false})
+    // to make and save pdf file 
 
-      try {
-        const canvas = await html2canvas(document.getElementById(`tableId${i}`));
+    // pdfTable = async(className, i) => {
+    //   this.setState({saving: false})
+
+    //   try {
+    //     const canvas = await html2canvas(document.getElementById(`tableId${i}`));
         
-        var img = new Image();   // Create new img element
-        img.src = canvas.toDataURL('image/png');
+    //     var img = new Image();   // Create new img element
+    //     img.src = canvas.toDataURL('image/png');
   
-        // window.open(img, "_blank")
+    //     // window.open(img, "_blank")
   
-        var doc = new jsPDF({
-          orientation: 'landscape',
-          unit: 'in',
-          format: [1300, 1000]
-        })
+    //     var doc = new jsPDF({
+    //       orientation: 'landscape',
+    //       unit: 'in',
+    //       format: [1300, 1000]
+    //     })
   
-        // const pdf = new jsPDF();
-        doc.addImage(img, 'PNG', -1, -6 - (i * 8.7));
-        const result = doc.save(`${className}.pdf`);
+    //     // const pdf = new jsPDF();
+    //     doc.addImage(img, 'PNG', -1, -6 - (i * 8.7));
+    //     const result = doc.save(`${className}.pdf`);
 
-        this.setState({saving: true})
+    //     this.setState({saving: true})
 
-        toast.success("downloaded")
-      } catch (error) {
-        this.setState({saving: false})
-        toast.error("Error in downloading Table")
-      }
-        
-    }
+    //     toast.success("downloaded")
+    //   } catch (error) {
+    //     this.setState({saving: false})
+    //     toast.error("Error in downloading Table")
+    //   }
+    // }
 
+    // saving image from data URL by canvas
     saveAs = (uri, filename) => {
       var link = document.createElement('a');
       if (typeof link.download === 'string') {
@@ -120,28 +115,30 @@ class TimeTable extends Component {
       }
     }
 
+    // method to create and save image
     imgTable = async(className, i) => {
-      this.setState({saving: false})
+      this.setState({saving: false})  //showing loader on start downloading image
 
       try {
         const canvas = await html2canvas(document.getElementById(`tableId${i}`));
 
         this.saveAs(canvas.toDataURL(), `${className}.png`)
 
-        this.setState({saving: true})
+        this.setState({saving: true})  //hide loader when image successfully saved
         toast.success("downloaded")
 
       } catch (error) {
-        this.setState({saving: false})
+        this.setState({saving: false})    //if have some exception then show loader and toast error
         toast.error("Error in downloading Table")
       }
     }
 
-
+//interface of this component
     render(){ 
         const {onGeneratedTimeTable: timeTables} = this.props; 
         const {showLoader, saving} = this.state;
         
+        // showing loader on conditions if table is not generated and showloader is true
         if(timeTables.length === 0 && showLoader){
             return (
                 <React.Fragment style={{marginTop: 200}}>
@@ -158,26 +155,33 @@ class TimeTable extends Component {
             );
         }
 
-        if(!saving){
-            return (
-                <Popup open={!saving} position="right center">
-                  <Grid container direction="row" justify="center" alignItems="center" item xs={12} style={{backgroundColor: "#2a3547"}} >
-                        <div style={{color: "#0f9ac4", paddingTop: 10, paddingBottom: 10}} className={styles.circleRoot}>
-                            Downloading.....
-                        </div>
-                    </Grid>
-                </Popup>
-               
-            );
-        }
+        // return this during saving image process
+        
 
+        // table interface
         return (
             <React.Fragment style={{marginTop: 200}}>
-                <Grid container direction="row" justify="center" alignItems="center" item xs={12}>
-                    <Button style={{backgroundColor: "#2a3547", color: "#d0d6e0", marginTop: 50}} color="primary" onClick={this.generateTable}>Generate Table</Button>
-                </Grid>
                 
+                 {/* generate table button */}
+                {timeTables.length === 0 ?
                     <Grid container direction="row" justify="center" alignItems="center" item xs={12}>
+                      <Button style={{backgroundColor: "#2a3547", color: "#d0d6e0", marginTop: 50}} color="primary" onClick={this.generateTable}>Generate Table</Button>
+                    </Grid>
+                 :  <Grid style={{marginTop: 30}} ></Grid>
+                } 
+
+                {/* show popup when image generate button clicked to until image downlaoded*/}
+                  {!saving ?
+                          <Popup open={!saving} position="center">
+                              <CircularProgress value = {100} />
+                          </Popup>
+                      :  
+                      null
+                  }
+
+                    <Grid container direction="row" justify="center" alignItems="center" item xs={12}>
+                        
+                        {/* maping to timrTables to render all tables in array of timeTables*/}
                         {timeTables.map((table, i) => {
                             return (
                                     <Grid container direction="column" justify="center" alignItems="center" item xs={8}>
@@ -192,6 +196,7 @@ class TimeTable extends Component {
                                               <div> 
                                                 <div className="table100 ver1 m-b-110">
                                                   <table   className="table-bordered table-hover" data-vertable="ver1">
+                                                    {/* head of timeTable */}
                                                     <thead>
                                                       <tr className="row100 head">
                                                         <th style={{cursor: "pointer", border:"2px solid rgba(43, 53, 69, 0.7)"}} className=" clickable column100 column2" data-column="column2">Days</th>
@@ -206,7 +211,7 @@ class TimeTable extends Component {
                                                       </tr>
                                                     </thead>
                                                   <tbody>
-                                    
+                                                    {/* maping throught table[2] to shoe all hourse of all days */}
                                                       {table[2].map((tab, i) =>{
                                                           return (
 
@@ -231,11 +236,15 @@ class TimeTable extends Component {
                                         </Paper>
 
                                         <Grid container direction="row" style={{marginTop: 30}} justify="center" alignItems="center" item xs={12}>
-                                            <Grid container direction="row" justify="flex-end" alignItems="center" item xs={6}>
+                                            
+                                            {/* saving pdf by clicking this button */}
+                                            {/* <Grid container direction="row" justify="flex-end" alignItems="center" item xs={6}>
                                                 <Button className="downloadButton" color="primary" onClick={() => this.pdfTable(table[0], i)}><GetAppIcon />  PDF of {table[0]} <span className = "smallSizeDownButton"> *slow</span></Button>
-                                            </Grid>
-                                            <Grid container direction="row" justify="flex-start" alignItems="center" item xs={6}>
-                                                <Button className="downloadButton"  color="primary" onClick={() => this.imgTable(table[0], i)}><GetAppIcon />  IMG of {table[0]} <span className = "smallSizeDownButton"> *fast</span></Button>
+                                            </Grid> */}
+
+                                            {/* save image button for every table */}
+                                            <Grid container direction="row" justify="center" alignItems="center" item xs={12}>
+                                                <Button className="downloadButton"  color="primary" onClick={() => this.imgTable(table[0], i)}><GetAppIcon />  IMG of {table[0]}</Button>
                                             </Grid>
                                         </Grid>
                                         

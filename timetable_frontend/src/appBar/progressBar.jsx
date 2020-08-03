@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
+// styling of linear progrss bar
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: 6,
@@ -22,6 +23,7 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
 }))(LinearProgress);
 
+// styling for circlular progress bar
 const useStylesFacebook = makeStyles((theme) => ({
   root: {
     position: 'relative',
@@ -34,9 +36,9 @@ const useStylesFacebook = makeStyles((theme) => ({
   },
 }));
 
+// circle progress bar
 function FacebookCircularProgress(props) {
   const classes = useStylesFacebook();
-  console.log("onononProgressValue: ", props.onononProgressValue)
   return (
     <div className={classes.root}>
       <Box position="relative" display="inline-flex">
@@ -69,17 +71,17 @@ function FacebookCircularProgress(props) {
 
 
 
+// getting value of progress from its parent component (ononProgressValue) taht is Pagination 
 export default function ProgressBars({ononProgressValue}) {
-
   return (
     <div className style={{flexGrow: 1}}>
       <form noValidate>
         <Grid container direction="row" item sm={12} >
           <Grid container direction="row" item sm={1} >
-            <FacebookCircularProgress onononProgressValue = {ononProgressValue} />
+            <FacebookCircularProgress onononProgressValue = {ononProgressValue} />  {/* circular progress bar component */}
           </Grid>
           <Grid container direction="row" item sm={11} style={{paddingLeft: 5, marginTop: 15}} >
-            <BorderLinearProgress variant="determinate" value={ononProgressValue} />
+            <BorderLinearProgress variant="determinate" value={ononProgressValue} />  {/* linear progress bar component */}
           </Grid>
         </Grid>
       </form>

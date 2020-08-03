@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import SendIcon from '@material-ui/icons/Send';
 import {toast} from "react-toastify";
 
+// styling of input field
 const CssTextField = withStyles({
   root: {
     '& label.Mui-focused': {
@@ -29,15 +30,17 @@ const CssTextField = withStyles({
 })(TextField);
 
 
+
 class Classes extends Component {
 
     state = {
-        classes: [{name: ""}],
+        classes: [{name: ""}],      //classes array in state to save the result and handling input field
         width: 0, height: 0,
         marginLeftTextField: 0,
-        buttonDisabled: true
+        buttonDisabled: true    //handling button disable or enable with boolean 
     }
 
+    // handling submit button: disable button if input feild do not have value
     sumbitButtonConstraint = (classes) => {
         let count = 0;
         classes.map((clas, i) => {
@@ -53,6 +56,7 @@ class Classes extends Component {
         }
     }
 
+    // checking that every input feild should have unique value
     checkUniqueArray = (classes) => {
         let singleArray = [];
         classes.map(clas => {
@@ -65,27 +69,31 @@ class Classes extends Component {
         }
     }
 
+    // handling change in input feild and update in classes acordingly to show in input feild
     handleChange = (e, i) => {
         const classes = [...this.state.classes];
         classes[i].name = e.target.value;
         this.setState({classes})
 
-        this.sumbitButtonConstraint(classes);
+        this.sumbitButtonConstraint(classes);   //checking that input feild should have value
 
-        this.checkUniqueArray(classes);
+        this.checkUniqueArray(classes);     //cheking uniquness of input feild
     }
 
+    // this function will add input feild if called
     addMoreField = () => {
-        const classes = [...this.state.classes, {name: ""}]
+        const classes = [...this.state.classes, {name: ""}] 
         this.setState({classes})
 
-        this.sumbitButtonConstraint(classes);
+        this.sumbitButtonConstraint(classes);   //disabling the submit button because here input feild will not have value
     }
 
+    // this function will be called when submit button will be clicked
     handleSubmit = () => {
         const classesArray = [];
-        const classes = [...this.state.classes];
+        const classes = [...this.state.classes];    //getting latest values from the state
         
+        // making class array of names that has been entered
         classes.map(clas => {
             let classArray = [clas.name, [
                 ["Monday", 0, 0, 0, 0, 0, 0, 0, 0],
@@ -97,16 +105,18 @@ class Classes extends Component {
             classesArray.push(classArray);
         })
 
+        // if input feild is empty mean class have no name, then removing it from classes array
         classes.map((room, i) => {
             if(!room.name){
                 classesArray.splice(i, 1);
             }
         })
 
-        this.props.onClasses(classesArray);
-        this.props.history.push("/home/teachers")
+        this.props.onClasses(classesArray); //calling function from parent component that is App and sending final result 
+        this.props.history.push("/home/teachers")   //going to forward to next page by changing the url
     }
 
+    // if input feild added by mistake with this function that can be removed by pressing the X button this function will be called
     handleRemove = (i) => {
         const classes = [...this.state.classes];
 
@@ -120,9 +130,7 @@ class Classes extends Component {
         this.sumbitButtonConstraint(classes);
     }
 
-
-
-        
+// handling some styling that can be affected by the resizing of application   ***** start_1 ***** 
     setMarginLeft = () => {
         if(window.innerWidth <= 700){
             this.setState({marginLeftTextField: 20})
@@ -131,36 +139,39 @@ class Classes extends Component {
         }
     }
 
+    // updaing dimension if size of application is chanegs
     updateDimensions = (i) => {
         this.setState({ width: window.innerWidth, height: window.innerHeight });
         if(i === 1){
             this.setMarginLeft();
         }
     };
-    
+    // will be called when component mount this is to handle some styling by the size of application
     componentDidMount() {
-
-        window.addEventListener('resize', () => this.updateDimensions(1));
-        this.setMarginLeft();
-        
+        window.addEventListener('resize', () => this.updateDimensions(1));  //adding event listner of resize to detech the size change of application
+        this.setMarginLeft();   //calling function if size of application is changed
     }
+    // will be called when component unmount
     componentWillUnmount() {
-        window.removeEventListener('resize', () => this.updateDimensions(0));
-        this.setMarginLeft();
-        // console.log(this.state.width)
+        window.removeEventListener('resize', () => this.updateDimensions(0));   //removing listner
+        this.setMarginLeft();   //calling function if size of application is changed
     }    
 
+                                                                            // ***** end_1 ***** 
+// interface of this component
     render(){
-        const {classes, buttonDisabled} = this.state;
+        const {classes, buttonDisabled} = this.state;   //geting values from state by object distructring syntax
 
         return (
             <form noValidate>
                 <Grid container alignItems="center" item xs={12} style={{marginTop: 60}}>
+                    {/* maping to classes array to render all input feilds in classes*/}
                     {
                         classes.map((clas, i) => {
                             return (
                                 <Grid container key = {i} direction="column" justify="center" alignItems="center" item xs={8} style={{marginTop: 20, marginLeft: this.state.marginLeftTextField * -2}}>  
                                     <Grid only="lg" container direction="row" justify="flex-end" alignItems="center" item sm={7} style={{marginLeft: this.state.marginLeftTextField * 8}} >                                  
+                                        {/* to remove the input feild by passing the index of feild */}
                                         <Button
                                             variant="contained"
                                             color="secondary"
@@ -171,6 +182,7 @@ class Classes extends Component {
                                         </Button>
                                     </Grid>
                                     <Grid container direction="row" justify="flex-end" alignItems="center" item sm={5} style={{marginTop: -40}}>                                    
+                                        {/* input feilds here calling the handleChange method to handle input value */}
                                         <CssTextField
                                             label = {`Class-${i+1} Name eg. Session18`}
                                             variant = "outlined"
@@ -192,6 +204,7 @@ class Classes extends Component {
                             item sm={4}
                             style={{marginTop: 20, marginLeft: this.state.marginLeftTextField * 2}}
                         >
+                            {/* butto to add more feilds by calling the addMoreFeild method */}
                         <Button style={{backgroundColor: "#2a3547", color: "#d0d6e0"}} onClick={this.addMoreField} variant="contained" >
                             Add more
                         </Button>
@@ -204,6 +217,7 @@ class Classes extends Component {
                     item xs={12}
                     style={{ marginTop: 40}}
                 >
+                    {/* submit button to submit current feilds and to go to next step */}
                     <Button
                         variant="contained"
                         style={{backgroundColor: buttonDisabled ? "#e0e0e0":'#2a3547', color: buttonDisabled ? "#c0cad8" : "#d0d6e0"}}

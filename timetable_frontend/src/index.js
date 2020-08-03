@@ -7,9 +7,10 @@ import * as serviceWorker from './serviceWorker';
 
 import {BrowserRouter} from "react-router-dom";
 
+// BrowserRouter for routing here
 ReactDOM.render(
-  <BrowserRouter> 
-    <App />
+  <BrowserRouter>     
+    <App />   {/* App component is going to render in div with the id root*/ }
   </BrowserRouter>,
   document.getElementById('root')
 );

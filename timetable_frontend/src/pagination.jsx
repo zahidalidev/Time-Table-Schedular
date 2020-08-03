@@ -14,6 +14,7 @@ class Pagination extends Component{
         progressValue: 1
     }
 
+// the values in this method handled according to the size of screen 
     setMarginLeft = () => {
         if(window.innerWidth <= 700){
             this.setState({smallScreen: true})
@@ -22,6 +23,7 @@ class Pagination extends Component{
         }
     }
 
+//updating the vales of width and eight in the state
     updateDimensions = (i) => {
         this.setState({ width: window.innerWidth, height: window.innerHeight });
         if(i === 1){
@@ -29,43 +31,48 @@ class Pagination extends Component{
         }
     };
     
+// adding event listner of resize to act when the screen will be resized
     componentDidMount() {
-
-        window.addEventListener('resize', () => this.updateDimensions(1));
+        window.addEventListener('resize', () => this.updateDimensions(1));  //if size of screen changes then call upcdateDimensions
         this.setMarginLeft();
-        
     }
+
+//removing event lisnter
     componentWillUnmount() {
         window.removeEventListener('resize', () => this.updateDimensions(0));
         this.setMarginLeft();
-        // console.log(this.state.width)
     }
 
+// this function will be called in the PrimarySearchAppBar component when we click home button
     reRednerPagination = () => {
-        const reRender = !this.state.reRender;
-   
-        this.setState({reRender, progressValue: 0})
+        const reRender = !this.state.reRender;  //reverse the value to rerender the component
+        this.setState({reRender, progressValue: 0})     //progress will be set to 0 when we goto home page
     }
 
     render(){
-        const {smallScreen, progressValue} = this.state;
-        
+        const {smallScreen, progressValue} = this.state;    //values from the state
+    
+        // handling style properties conditionally acording to url path
         const backColorDefault = "#2a3547";
         const textCOlor = "#dadfe8";
-        
-        const selectedId = window.location.pathname.substr(6);
-
+        const selectedId = window.location.pathname.substr(6);  //getting url and removing /home/
         const changeColor1 = selectedId === "classrooms";
         const changeColor2 = selectedId === "classes";
         const changeColor3 = selectedId === "teachers";
         const changeColor4 = selectedId === "courses";
         const changeColor5 = selectedId === "table";
+
         return(
             <div>
+                {/* calling the PrimarySearchAppBar component and passing the mehtod reference to call from there*/}
                 <PrimarySearchAppBar onreRednerPagination = {this.reRednerPagination} />
+
+                {/* here is the tracking bar of application to track the pagees */}
                 <form noValidate >
                     <Grid container style={{marginTop: 100}} direction="col" justify="center" alignItems="center" item sm={12} >
                         <Grid container direction="row" justify="center" alignItems="center" item sm={6} >
+                            
+                            {/* progress bar compnent sending the value of progress from here to progressBars componetn*/}
                             <ProgressBars ononProgressValue = {progressValue ? this.props.onProgressValue : progressValue} />
                         </Grid>
                         <Grid container style={{marginTop: 40}} direction="row" justify="center" alignItems="center" item sm={12} >
@@ -85,8 +92,6 @@ class Pagination extends Component{
                                 <Button disabled style={{backgroundColor: changeColor5 ? "#0f9ac4" : backColorDefault, color: textCOlor}} >
                                     <p style={{fontSize: smallScreen ? 7 : 11, marginBottom: -1}}>5- Time Table</p>
                                 </Button>
-
-                                {/* <Button onClick={()=> filterOrder('delivered')} variant={delivered} >Delivered</Button> */}
                             </ButtonGroup>
                         </Grid>
                     </Grid>

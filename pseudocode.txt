@@ -49,7 +49,7 @@ checkCourse(currentCourse, i, j, cr, cls, cl)
     if checkClassRoom(currentCourse, i, j, cr, cl)    //if class room available count increase
         count++
         
-    if count == 3    //if all resources available then chTeacher with teacher index and true
+    if count == 3    //if all resources available then return chTeacher with teacher index and true
         return chTeacher
 
     return [false]
@@ -79,7 +79,7 @@ generateTimeTable()
                                     teachers[chCourse[1]][1][i][j] = 1
                                     j++
 
-                                courses[y].crHouurs.splice(0, 1);         //removing credit taht are used
+                                courses[y].crHouurs.splice(0, 1);         //removing credit that are used
                                 
                                 if courses[y].crHouurs.length == 0
                                     courses.splice(y, 1)     //removing course if its all its credit hours is used so length of course array will be less by 1
@@ -90,7 +90,7 @@ generateTimeTable()
                         j++;
                     
          //pushing current session table to allTable array ant making him empty
-            let table[k] = timeTable[k]    //to copy array by value
+            let table[k] = timeTable[k] 
             for ta = 0 to allTables.length or allTables.length == 0
                 if allTables.length != 0 
                     if classes[cls][0] == allTables[ta][0]

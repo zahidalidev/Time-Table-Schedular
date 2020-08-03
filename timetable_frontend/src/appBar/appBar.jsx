@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Link} from "react-router-dom";
 import CardMedia from '@material-ui/core/CardMedia';
-import Logo from "./az_time_schedular.png";
+import Logo from "../assets/az_time_schedular.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,20 +21,17 @@ const useStyles = makeStyles((theme) => ({
 class PrimarySearchAppBar extends Component{
 
     state = {
-      marginLeftLogo: 20
+      marginLeftLogo: 20  //to hadnle margin conditionally
     }
-    updateDimensions = (i) => {
-        this.setState({ width: window.innerWidth, height: window.innerHeight });
-        console.log("hi chane")
-    };
 
-   
+    //thi will be called when home button is clicked 
     renderPagination = () => {
-        this.props.onreRednerPagination()
-        window.location.reload(true);
+        this.props.onreRednerPagination();  //calling funtion from its parent componet
+        window.location.reload(true);   //reloading the page 
     }
 
-    setMarginLeft = () => {
+    // changin the margin of the logo conditionally on chnage of the screen size
+  setMarginLeft = () => {
       if(window.innerWidth <= 700){
           this.setState({marginLeftLogo: 2})
       }else{
@@ -42,6 +39,7 @@ class PrimarySearchAppBar extends Component{
       }
   }
 
+  //calling setMarginLeft method when size is chaged of the screen or at the loading of this componet
   updateDimensions = (i) => {
       this.setState({ width: window.innerWidth, height: window.innerHeight });
       if(i === 1){
@@ -49,22 +47,23 @@ class PrimarySearchAppBar extends Component{
       }
   };
   
+  //this method will be called when component is mount
   componentDidMount() {
-
-      window.addEventListener('resize', () => this.updateDimensions(1));
+      window.addEventListener('resize', () => this.updateDimensions(1));  //to listen size change event
       this.setMarginLeft();
-      
   }
+
+   //this method will be called when component will unmount
   componentWillUnmount() {
-      window.removeEventListener('resize', () => this.updateDimensions(0));
+      window.removeEventListener('resize', () => this.updateDimensions(0)); //removing listner when component is unmount
       this.setMarginLeft();
-      // console.log(this.state.width)
   }    
 
   render() {
     
-    const {marginLeftLogo} = this.state;
+    const {marginLeftLogo} = this.state;  //values from the state
 
+    // app bar
     return (
       <div className={useStyles.root}>
         <div style={{backgroundColor: '#202833'}} position="static">

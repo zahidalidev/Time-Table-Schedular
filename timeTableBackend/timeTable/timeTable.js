@@ -10,12 +10,6 @@ let timeTable = [
     ["Friday", 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-
-
-
-
-
-
 let classRooms = [
     [[[],[],[],[],[],]],
     [[[],[],[],[],[],]],
@@ -42,29 +36,28 @@ let teachers = [[[[],[],[],[]]]];
 let daysPerWeek = timeTable.length;
 let hoursPerDay = timeTable[0].length;
 
-
+//function to check the teacher for particular course in particular hourse is available 
 checkTeacher = (currentCourse, i, j, cr) => {
 
     if((currentCourse.crHouurs[cr] == 0) || currentCourse.crHouurs.length == 0){
         return [false];
-        // return [true, 1];
     }
     
     for(let t = 0; t < teachers.length; t++){
         
-        if(currentCourse.teacher === teachers[t][0]){
-            let tHour = j;
+        if(currentCourse.teacher === teachers[t][0]){   //maching teacher of current course
+
+            //checking teacher for all credit hourse of course is available
+            let tHour = j;  
             for(let l = 0; l < currentCourse.crHouurs[cr]; l++){
                 
                 if(teachers[t][1][i][tHour] == 0){
                     tHour++;
                 }else{
-                    return [false];
-                    // return [true, t];
+                    return [false]; //return false if teacher is not avaiable for current course
                 }
                 if(l == currentCourse.crHouurs[cr] - 1){
-                    // console.log(i, tHour , currentCourse.crHouurs[cr])
-                    return [true, t];
+                    return [true, t];   //returning index of teacher and true if teacher is available
                 }
             }
         }
@@ -73,6 +66,8 @@ checkTeacher = (currentCourse, i, j, cr) => {
 
 
 checkClassRoom = (currentCourse, i, j, cr, cl) => {
+
+    //checking class room for all credit hourse of course is available
     let clHour = j;
     for(let l = 0; l < currentCourse.crHouurs[cr]; l++){
         if(classRooms[cl][1][i][clHour] == 0){
@@ -87,6 +82,7 @@ checkClassRoom = (currentCourse, i, j, cr, cl) => {
 }
 
 checkClasses = (currentCourse, i, j, cr, cls) => {
+    //checking class for all credit hourse of course is available
     let clHour = j;
     for(let l = 0; l < currentCourse.crHouurs[cr]; l++){
         if((classes[cls][1][i][clHour] == 0)){
@@ -101,6 +97,7 @@ checkClasses = (currentCourse, i, j, cr, cls) => {
 }
 
 checkTimeTable = (currentCourse, i, j, cr) => {
+    //checking time table for all credit hourse of course is available
     let clHour = j;
     for(let l = 0; l < currentCourse.crHouurs[cr]; l++){
         
@@ -120,45 +117,45 @@ checkCourse = (currentCourse, i, j, cr, cls, cl) => {
     let count = 0;
     
 
-    if (currentCourse.crHouurs[cr] == 3 && j >=  6){
+    if (currentCourse.crHouurs[cr] == 3 && j >=  6){    //if redit of course is greater then available hourse then course should not be allocate
         count--;
     }
 
-    if (currentCourse.crHouurs[cr] == 2 && j >=  7){
+    if (currentCourse.crHouurs[cr] == 2 && j >=  7){    //if redit of course is greater then available hourse then course should not be allocate
         count--;
     }
 
-    if(classes[cls][0] == currentCourse.session){
+    if(classes[cls][0] == currentCourse.session){       //if class is available for current course
         count++;
     }
     
     
     let chTeacher = checkTeacher(currentCourse, i, j, cr);
 
-    if (chTeacher[0]){
+    if (chTeacher[0]){   //if teacher is available making count increase
         count++;
     }
     
-    if(checkClassRoom(currentCourse, i, j, cr, cl)){
+    if(checkClassRoom(currentCourse, i, j, cr, cl)){     //if class room available count increase
         count++
     }
     
-    if(checkClasses(currentCourse, i, j, cr, cls)){
+    if(checkClasses(currentCourse, i, j, cr, cls)){     //if class available count increase
         count++
     }
     
-    if(checkTimeTable(currentCourse, i, j, cr)){
+    if(checkTimeTable(currentCourse, i, j, cr)){        //if timeTable available count increase
         count++
     }
     
-    if (count == 5){
+    if (count == 5){     //if all resources available then return chTeacher with teacher index and true
         return chTeacher;
     }
 
     return [false];
 }
 
-let allTables = new Array;
+let allTables = new Array;  //to store all time tables 
 
 generateTimeTable = () => {
     let cl = 0;
@@ -172,18 +169,19 @@ generateTimeTable = () => {
                 let jCouunt = 0;
                 while(j < hoursPerDay ){
                     
+                    //if time table, class room and class mean all have time slots available
                     if((timeTable[i][j] == 0) && (classRooms[cl][1][i][j] == 0) && (classes[cls][1][i][j] == 0)) {
                         
                         let y = 0;
-                        while(y < courses.length){
+                        while(y < courses.length){  //checking for courses on every hour of the day so that can be alloted
                             if(j === hoursPerDay){
                                 j = 1;
                             }
-                            let chCourse = checkCourse(courses[y], i, j, 0, cls, cl);
+                            let chCourse = checkCourse(courses[y], i, j, 0, cls, cl);   //if course is avaible mean course have teacehr for all its current credit hourse
                             
                             if (chCourse[0]){
                                 
-                                for(let m = 0; m < courses[y].crHouurs[0]; m++){
+                                for(let m = 0; m < courses[y].crHouurs[0]; m++){    //making bussy to all slots until credit hourse and allocating course
 
                                     timeTable[i][j] = courses[y].name + ', ' + courses[y].teacher + ', ' + classRooms[cl][0];
                                     classRooms[cl][1][i][j] = 1;
@@ -192,10 +190,10 @@ generateTimeTable = () => {
                                     j++;
 
                                 }
-                                courses[y].crHouurs.splice(0, 1);         //removing credit used credit hours
+                                courses[y].crHouurs.splice(0, 1);          //removing credit that are used
                                 
                                 if(courses[y].crHouurs.length == 0){
-                                    courses.splice(y, 1)     //removing course if its all credit hours is used
+                                    courses.splice(y, 1)     //removing course if its all its credit hours is used so length of course array will be less by 1
                                 }
                                 
                             }else{
@@ -211,10 +209,11 @@ generateTimeTable = () => {
             }
            
             var table = []; 
-            for (var k = 0; k < timeTable.length; k++) {
-                table[k] = timeTable[k].slice();    //to copy array by value
+            for (var k = 0; k < timeTable.length; k++) {    //to copy array by value
+                table[k] = timeTable[k].slice();    
             }
             
+            //pushing current session table to allTable array ant making him empty
             for(let ta = 0; ta < allTables.length || allTables.length == 0; ta++){
                 if(allTables.length != 0){
                     
@@ -223,7 +222,7 @@ generateTimeTable = () => {
                         for(let dpw = 0; dpw < daysPerWeek; dpw++){
                             for(let hpd = 1; hpd < hoursPerDay; hpd++){
                                 
-                                if((allTables[ta][2][dpw][hpd] == 0) && (table[dpw][hpd] != 0)){
+                                if((allTables[ta][2][dpw][hpd] == 0) && (table[dpw][hpd] != 0)){    //if allTable slots is free and time table slot is buusy then copy that slot to allTable
                                     allTables[ta][2][dpw][hpd] = table[dpw][hpd];
                                 }
 
@@ -238,13 +237,13 @@ generateTimeTable = () => {
                             }
                         }
                         if(count == 0){
-                            allTables.push([classes[cls][0], classRooms[cl][0], table]);    
+                            allTables.push([classes[cls][0], classRooms[cl][0], table]);   //pushing current room name, class name and table to all table array 
                         }
                     }
 
                 }else{
                     
-                    allTables.push([classes[cls][0], classRooms[cl][0], table]);    
+                    allTables.push([classes[cls][0], classRooms[cl][0], table]);    //pushing current room name, class name and table to all table array
                 }
             }
 
