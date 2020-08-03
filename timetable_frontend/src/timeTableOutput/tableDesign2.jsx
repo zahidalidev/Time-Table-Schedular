@@ -167,7 +167,10 @@ class TimeTable extends Component {
                     <Grid container direction="row" justify="center" alignItems="center" item xs={12}>
                       <Button style={{backgroundColor: "#2a3547", color: "#d0d6e0", marginTop: 50}} color="primary" onClick={this.generateTable}>Generate Table</Button>
                     </Grid>
-                 :  <Grid style={{marginTop: 30}} ></Grid>
+                 :   
+                  <Grid container direction="row" justify="center" alignItems="center" item xs={12}>
+                    <p class="homeInstruction" style={{ marginTop: 50, color: "#2a3547"}} ><b><span style={{color: "red"}}>*</span>Goto to Home Page to again generate time table by clicking Home button on App Bar</b></p>
+                  </Grid>
                 } 
 
                 {/* show popup when image generate button clicked to until image downlaoded*/}

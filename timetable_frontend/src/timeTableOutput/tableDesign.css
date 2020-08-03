@@ -190,6 +190,11 @@ iframe {
     margin-bottom: -20px !important;
   }
 
+  .homeInstruction{
+    font-size: 10px !important;
+    margin-left: 15px !important;
+  }
+
   .smallSizeDownButton{
     font-size: 4px
   }
