@@ -3,7 +3,6 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-import PrimarySearchAppBar from "./appBar/appBar";
 import ProgressBars from "./appBar/progressBar"
 
 class Pagination extends Component{
@@ -43,12 +42,6 @@ class Pagination extends Component{
         this.setMarginLeft();
     }
 
-// this function will be called in the PrimarySearchAppBar component when we click home button
-    reRednerPagination = () => {
-        const reRender = !this.state.reRender;  //reverse the value to rerender the component
-        this.setState({reRender, progressValue: 0})     //progress will be set to 0 when we goto home page
-    }
-
     render(){
         const {smallScreen, progressValue} = this.state;    //values from the state
     
@@ -64,8 +57,7 @@ class Pagination extends Component{
 
         return(
             <div>
-                {/* calling the PrimarySearchAppBar component and passing the mehtod reference to call from there*/}
-                <PrimarySearchAppBar onreRednerPagination = {this.reRednerPagination} />
+                
 
                 {/* here is the tracking bar of application to track the pagees */}
                 <form noValidate >

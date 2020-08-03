@@ -10,6 +10,7 @@ import Courses from "./timeTableInput/courses";
 import TimeTable from "./timeTableOutput/tableDesign2";
 import {generateTableWithPost} from "./http/api";
 import Footer2 from "./footer/footer2";
+import PrimarySearchAppBar from "./appBar/appBar";
 
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
@@ -94,14 +95,18 @@ class App extends Component {
 
         {/* toast notification properties */}
         <ToastContainer autoClose={5000} position={toast.POSITION.TOP_RIGHT} /> 
+          
+        {/* calling the PrimarySearchAppBar component*/}
+        <Route render = {(props) => < PrimarySearchAppBar {...props} />} />
 
         {/* pagination component to track components and progress */}
-          <Pagination onProgressValue = {progressValue} />
-          
+        <Pagination onProgressValue = {progressValue} />
+
           {/* the componets in the switch will be handled according to path */}
           <Switch>
-            {/* if url path matches to /home/classrooms then render this component */}
-            <Route path = "/home/classrooms" exact render = {(props) => < ClassRooms {...props} onClassRooms = {this.handleClassRooms} />} />
+            
+            {/* if url path matches to / then render this component */}
+            <Route path = "/" exact render = {(props) => < ClassRooms {...props} onClassRooms = {this.handleClassRooms} />} />
             
             {/* following compnents will be render on the bases of url path and 
               can be access if progress value will matched with the conditions and 
@@ -131,7 +136,7 @@ class App extends Component {
               : null
             }
             {/* if didnot match any of above path then redirect that to this path */}
-            <Redirect to="/home/classrooms" />
+            <Redirect to="/" />
           </Switch>
         <Footer2 /> {/* footer of the application */}
       </div>

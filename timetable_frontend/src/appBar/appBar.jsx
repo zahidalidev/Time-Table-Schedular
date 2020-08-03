@@ -26,7 +26,7 @@ class PrimarySearchAppBar extends Component{
 
     //thi will be called when home button is clicked 
     renderPagination = () => {
-        this.props.onreRednerPagination();  //calling funtion from its parent componet
+        this.props.history.push("/"); //changing url 
         window.location.reload(true);   //reloading the page 
     }
 
@@ -70,7 +70,7 @@ class PrimarySearchAppBar extends Component{
           <Toolbar variant="dense">
               <img src={Logo}  width="250" height="70" style={{padding: 10, marginLeft: marginLeftLogo}} />
             <Typography variant="h6" style={{marginLeft: marginLeftLogo * 2 + 10}}>
-              <Link onClick={this.renderPagination} style={{color:  "white", textDecoration: 'none'}} to="/home/classrooms" >Home</Link>
+              <Link onClick={this.renderPagination} style={{color:  "white", textDecoration: 'none'}} >Home</Link>
             </Typography>
           </Toolbar>
         </div>
