@@ -9,5 +9,5 @@
 | ------- | -------------------------- | ---------- | --------------------------------------------------------------------------------------- ------------ |
 | 1       | nodeJS                     | 8.17.0     | We need nodeJS to run our backend application. We also need nodeJS to run node package manager (npm).|
 | 2       | git bash                   | 2.27.0.    | <span>It has multiple uses depends upon us dealing with github such as clone can be done using git bash. Furthermore, we can also run our back-end and front using Git Bash.</span>| 
-| 3       | visual studio code         | 1.47.3     | We use Visual studio (VS) Code to write our JS code. We can also use VS code (ctrl + ~) terminal to get some services which git bash provides.|
+| 3       | visual studio code         | 1.47.3     | <span>We use Visual studio (VS) Code to write our JS code. We can also use VS code (ctrl + ~) terminal to get some services which git bash provides.</span>|
 | 4       |  OS (window 10 Pro 64-bit) | 10.0.19041 | Basic requirement ☻|
