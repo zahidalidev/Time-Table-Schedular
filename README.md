@@ -13,15 +13,20 @@
 
 <br>
 <h3>Project Configuration Guidelines (Step by Step):</h3>
- 1. **Step 1:**  Install nodejs (8.17.0) from [https://nodejs.org/en/]
- 2. **Step 2:** Install Git Bash  (2.27.0.windows.1)  from [https://git-scm.com/download/win] (it is optional in this case as requirements can be fulfilled manually by other platforms; preferable to install for convenience).
+ 1. **Step 1:**  Install nodejs (8.17.0) from https://nodejs.org/en/
  
- 3.	Step3: Install visual studio code (1.47.3)
+ 2. **Step 2:**  Install Git Bash  (2.27.0.windows.1)  from https://git-scm.com/download/win (it is optional in this case as requirements can be fulfilled manually by other platforms; preferable to install for convenience).
+ 
+3.	Step3: Install visual studio code (1.47.3)
+ 
 4.	Step4: Clone the repository from https://github.com/zahidalidev/CS311S20PID25.git using any of your convenient tool.
-5.	Step5(method#1): Go to “timeTableBackend” from the repository you have cloned and open git bash here and run command “node index.js” then in the response you will see message “listening on port 5000” it means backend is running.
+
+5.	Step5(method#1): Go to “timeTableBackend” from the repository you have cloned and open git bash here and run command “node index.js” then in the response you will see message “listening on port 5000” it means backend is running.<br>
 Step5 (method#2): Go to “timeTableBackend”  from the repository you have cloned  and open with visual studio here and press ctrl + ~ and run command “node index.js” then in the response you will see message “listening on port 5000” its mean backend is running.
-6.	Step6 (method#1): Go to “timetable_frontend” from the repository you have cloned and open git bash here and run command “npm start”, in the response frontend application will start running on “http://localhost:3000/” (browser) on port in 3000 in a while so now both front-end and backend are running.
+
+6.	Step6 (method#1): Go to “timetable_frontend” from the repository you have cloned and open git bash here and run command “npm start”, in the response frontend application will start running on “http://localhost:3000/” (browser) on port in 3000 in a while so now both front-end and backend are running.<br>
 Step6 (method#2):  Go to “timetable_frontend”  from the repository you have cloned  and open with visual studio here and press ctrl + ~ and run command “npm start” then in the response frontend application will start running on “http://localhost:3000/” (browser) on port in 3000 in a while so now both front-end and backend are running. 
+
 
 
 
