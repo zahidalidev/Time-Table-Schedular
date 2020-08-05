@@ -4,5 +4,8 @@
 <h4>Programming Languages:-</h4>
 <span>We are using javascript (JS) as programming language for our project. In JS we have used node-JS as backend and reactJS as front-end.</h4></br></br></br></br>
 
-
+| Sr No. | Software |
+| --- | --- |
+| 1   | `nodeJS`s |
+| 2   | `git bash` |
 
