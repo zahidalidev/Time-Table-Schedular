@@ -1,5 +1,5 @@
 # CS311 Term Project Configuration Document
-<span><b>Project:</b> Activity Scheduler </span>
+<span><b>Project:</b> Activity Scheduler </span><br>
 <span> <b> Live Web Application Link: </b> http://az.mrfixer.pk/ </span>
 <h3>Programming Languages, Tools and software (IDEs) used for Project implementation: </h3>
 <h4>Programming Languages:-</h4>
@@ -10,7 +10,7 @@
 | 1       | nodeJS                     | 8.17.0     | We need nodeJS to run our backend application. We also need nodeJS to run node package manager (npm).|
 | 2       | git bash                   | 2.27.0.    | It has multiple uses depends upon us dealing with github such as clone can be done using git bash. Furthermore, we can also run our back-end and front using Git Bash.|
 | 3       | visual studio code         | 1.47.3     | We use Visual studio (VS) Code to write our JS code. We can also use VS code<br /> (ctrl + ~) terminal to get some services which git bash provides.|
-| 4       |  OS (window 10 Pro 64-bit) | 10.0.19041 | Basic requirement ☻.|
+| 4       |  OS (window 10 Pro 64-bit) | 10.0.19041 | Basic requirement ☻. The operating sytem we are using for this project is Window 10.|
 
 <br>
 <h3>Project Configuration Guidelines (Step by Step):</h3>
