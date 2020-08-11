@@ -69,6 +69,28 @@ class Classes extends Component {
         }
     }
 
+
+    // handling the input fields with white space
+    checkEmptyField = (classes) => {
+        let totalCounter = 0;
+        classes.map((clas, i) => {
+            let emptyCounter = 0;
+            for(let j = 0; j < clas.name.length; j++){
+                if(clas.name[j] === " "){
+                    emptyCounter++;
+                }
+            }
+            if(clas.name.length === emptyCounter){
+                totalCounter++;
+            }
+        })
+        
+        if(totalCounter > 0){           
+            this.setState({buttonDisabled: true})            
+        }
+    }
+
+
     // handling change in input feild and update in classes acordingly to show in input feild
     handleChange = (e, i) => {
         const classes = [...this.state.classes];
@@ -78,6 +100,8 @@ class Classes extends Component {
         this.sumbitButtonConstraint(classes);   //checking that input feild should have value
 
         this.checkUniqueArray(classes);     //cheking uniquness of input feild
+
+        this.checkEmptyField(classes);      // checking white spaces in input fields
     }
 
     // this function will add input feild if called
@@ -86,6 +110,8 @@ class Classes extends Component {
         this.setState({classes})
 
         this.sumbitButtonConstraint(classes);   //disabling the submit button because here input feild will not have value
+    
+        this.checkEmptyField(classes);      // checking white spaces in input fields
     }
 
     // this function will be called when submit button will be clicked
@@ -128,6 +154,8 @@ class Classes extends Component {
         }
 
         this.sumbitButtonConstraint(classes);
+
+        this.checkEmptyField(classes);      // checking white spaces in input fields
     }
 
 // handling some styling that can be affected by the resizing of application   ***** start_1 ***** 
