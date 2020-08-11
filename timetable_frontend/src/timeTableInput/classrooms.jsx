@@ -67,15 +67,38 @@ class ClassRooms extends Component {
         }
     }
 
+// handling the input fields with white space
+    checkEmptyField = (rooms) => {
+        let totalCounter = 0;
+        rooms.map((room, i) => {
+            let emptyCounter = 0;
+            for(let j = 0; j < room.name.length; j++){
+                if(room.name[j] === " "){
+                    emptyCounter++;
+                }
+            }
+            if(room.name.length === emptyCounter){
+                totalCounter++;
+            }
+        })
+
+        if(totalCounter > 0){           
+            this.setState({buttonDisabled: true})            
+        }
+    }
+
     // handling change in input feild and update in rooms acordingly to show in input feild
     handleChange = (e, i) => {
         const rooms = [...this.state.rooms];
         rooms[i].name = e.target.value;
         this.setState({rooms})
+        
 
         this.sumbitButtonCOnstraint(rooms)   //checking that input feild should have value
 
         this.checkUniqueArray(rooms);    //cheking uniquness of input feild
+
+        this.checkEmptyField(rooms);    // checking white space sof input fields
     }
 
     // this function will add input feild if called
@@ -84,6 +107,8 @@ class ClassRooms extends Component {
         this.setState({rooms})
 
         this.sumbitButtonCOnstraint(rooms)  //disabling the submit button because here input feild will not have value
+        
+        this.checkEmptyField(rooms);    // checking white space sof input fields
     }
 
     // this function will be called when submit button will be clicked
@@ -126,6 +151,8 @@ class ClassRooms extends Component {
         }
 
         this.sumbitButtonCOnstraint(rooms)
+
+        this.checkEmptyField(rooms);    // checking white space sof input fields
     }
 
 

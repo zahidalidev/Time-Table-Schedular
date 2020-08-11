@@ -76,6 +76,28 @@ class Courses extends Component {
         }
     }
 
+
+    // handling the input fields with white space
+    checkEmptyField = (courses) => {
+        let totalCounter = 0;
+        courses.map((course, i) => {
+            let emptyCounter = 0;
+            for(let j = 0; j < course.name.length; j++){
+                if(course.name[j] === " "){
+                    emptyCounter++;
+                }
+            }
+            if(course.name.length === emptyCounter){
+                totalCounter++;
+            }
+        })
+        
+        if(totalCounter > 0){           
+            this.setState({buttonDisabled: true})            
+        }
+    }
+
+
 // handling change in input feild and update in courses acordingly to show in input feild
     handleChange = (e, i, j) => {
         const crditHourArray = [[1, 1, 1], [1, 2], [2, 1], [3], [1, 1], [2], [1]];  //avaiable credit hourse options
@@ -96,6 +118,8 @@ class Courses extends Component {
 
         this.checkUniqueArray(courses);     //cheking uniquness of input feild (course name should unique)
 
+        this.checkEmptyField(courses);           // checking white space in input field
+
     }
 
     // this function will add input feild if called
@@ -104,6 +128,9 @@ class Courses extends Component {
         this.setState({courses});
 
         this.sumbitButtonConstraint(courses);   //disabling the submit button because here input feild will not have value
+        
+        this.checkEmptyField(courses);           // checking white space in input field
+
     }
 
     // this function will be called when submit button will be clicked
@@ -143,6 +170,9 @@ class Courses extends Component {
         }
 
         this.sumbitButtonConstraint(courses);
+
+        this.checkEmptyField(courses);           // checking white space in input field
+
     }
 
 // handling some styling that can be affected by the resizing of application   ***** start_1 ***** 

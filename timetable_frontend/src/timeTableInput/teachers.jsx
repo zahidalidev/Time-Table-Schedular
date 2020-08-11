@@ -81,6 +81,27 @@ class Teachers extends Component {
         }
     }
 
+
+    // handling the input fields with white space
+    checkEmptyField = (teachers) => {
+        let totalCounter = 0;
+        teachers.map((teacher, i) => {
+            let emptyCounter = 0;
+            for(let j = 0; j < teacher[0].length; j++){
+                if(teacher[0][j] === " "){
+                    emptyCounter++;
+                }
+            }
+            if(teacher[0].length === emptyCounter){
+                totalCounter++;
+            }
+        })
+        
+        if(totalCounter > 0){           
+            this.setState({buttonDisabled: true})            
+        }
+    }
+
     // handling change in input feild and update in teachers acordingly to show in input feild
     handleChange = (e, i, j, k) => {
 
@@ -98,6 +119,8 @@ class Teachers extends Component {
         this.sumbitButtonConstraint(teachers);  //checking that input feild should have value mean teacher hve name
 
         this.checkUniqueArray(teachers);    //cheking uniquness of input feild
+
+        this.checkEmptyField(teachers);     //checking white space in input field
     }
 
     // this function will add input feild if called
@@ -112,6 +135,8 @@ class Teachers extends Component {
         this.setState({teachers});
 
         this.sumbitButtonConstraint(teachers);  //disabling the submit button because here input feild will not have value
+        
+        this.checkEmptyField(teachers);     //checking white space in input field
     }
 
     // this function will be called when submit button will be clicked
@@ -139,6 +164,8 @@ class Teachers extends Component {
         }
 
         this.sumbitButtonConstraint(teachers);
+
+        this.checkEmptyField(teachers);     //checking white space in input field
     }
 
 
