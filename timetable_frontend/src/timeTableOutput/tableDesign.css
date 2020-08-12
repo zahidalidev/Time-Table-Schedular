@@ -159,6 +159,7 @@ iframe {
   /* body {
     margin-right: 0px !important;
   } */
+
   .table-Body-maincss {
     margin-left: -31px !important;
   }
@@ -179,6 +180,7 @@ iframe {
   table {
     width: 45% !important;
     margin-left: 0px !important;
+    max-width: 240px !important;
   }
 
   .table-bordered{
@@ -300,7 +302,7 @@ iframe {
 table {
   width: 110%;
   background-color: #fff;
-  margin-left: -36px;
+  /* margin-left: -36px; */
 }
 
 th, td {

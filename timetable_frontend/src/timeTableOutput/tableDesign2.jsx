@@ -197,9 +197,9 @@ class TimeTable extends Component {
                                                   <h4 className="sessionName" style={{marginTop: "54px", marginBottom: "58px", color: "#202d42"}}>Class Name: <span style={{color: "#0f9ac4"}}>{table[0]}</span></h4>
                                               </Grid>
                                               <div> 
-                                                <div className="table100 ver1 m-b-110">
-                                                  <table   className="table-bordered table-hover" data-vertable="ver1">
-                                                    {/* head of timeTable */}
+                                                <div className="table100 ver1 m-b-110" style={{overflow:"auto", maxWidth: "1130px"}}>
+                                                  <table className="table-bordered table-hover" data-vertable="ver1">
+                                                    {/* head of timeTablclassNamee */}
                                                     <thead>
                                                       <tr className="row100 head">
                                                         <th style={{cursor: "pointer", border:"2px solid rgba(43, 53, 69, 0.7)"}} className=" clickable column100 column2" data-column="column2">Days</th>
