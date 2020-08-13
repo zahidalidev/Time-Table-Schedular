@@ -153,12 +153,16 @@ iframe {
 /*//////////////////////////////////////////////////////////////////
 [ Table ]*/
 @media (max-width: 767px){
+  .table100{
+    max-width: 240px !important;
+  }
   .navbar-bg {
     width: 106% !important;
   }
   /* body {
     margin-right: 0px !important;
   } */
+
   .table-Body-maincss {
     margin-left: -31px !important;
   }
@@ -300,7 +304,7 @@ iframe {
 table {
   width: 110%;
   background-color: #fff;
-  margin-left: -36px;
+  /* margin-left: -36px; */
 }
 
 th, td {
