@@ -102,6 +102,15 @@ class Teachers extends Component {
         }
     }
 
+    // handling the maximum length of input field
+    maxLengthConstraint = (teachers) => {
+        teachers.map((teacher, i) => {
+            if(teacher[0].length > 20){
+                this.setState({buttonDisabled: true}) 
+                toast.error("Only 20 characters are allowed in teacher name");    
+            }
+        })
+    }
     // handling change in input feild and update in teachers acordingly to show in input feild
     handleChange = (e, i, j, k) => {
 
@@ -121,6 +130,8 @@ class Teachers extends Component {
         this.checkUniqueArray(teachers);    //cheking uniquness of input feild
 
         this.checkEmptyField(teachers);     //checking white space in input field
+
+        this.maxLengthConstraint(teachers);     //checking maximum length in input field
     }
 
     // this function will add input feild if called
@@ -137,6 +148,9 @@ class Teachers extends Component {
         this.sumbitButtonConstraint(teachers);  //disabling the submit button because here input feild will not have value
         
         this.checkEmptyField(teachers);     //checking white space in input field
+
+        this.maxLengthConstraint(teachers);     //checking maximum length in input field
+
     }
 
     // this function will be called when submit button will be clicked
@@ -166,6 +180,9 @@ class Teachers extends Component {
         this.sumbitButtonConstraint(teachers);
 
         this.checkEmptyField(teachers);     //checking white space in input field
+
+        this.maxLengthConstraint(teachers);     //checking maximum length in input field
+
     }
 
 

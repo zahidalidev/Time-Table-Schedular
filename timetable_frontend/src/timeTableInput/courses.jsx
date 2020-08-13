@@ -97,6 +97,16 @@ class Courses extends Component {
         }
     }
 
+    // handling the maximum length of input field
+    maxLengthConstraint = (courses) => {
+        courses.map((course, i) => {
+            if(course.name.length > 12){
+                this.setState({buttonDisabled: true}) 
+                toast.error("Only 12 characters are allowed in course name");    
+            }
+        })
+    }
+
 
 // handling change in input feild and update in courses acordingly to show in input feild
     handleChange = (e, i, j) => {
@@ -120,6 +130,9 @@ class Courses extends Component {
 
         this.checkEmptyField(courses);           // checking white space in input field
 
+        this.maxLengthConstraint(courses);           // checking maximum length in input field
+
+
     }
 
     // this function will add input feild if called
@@ -130,6 +143,8 @@ class Courses extends Component {
         this.sumbitButtonConstraint(courses);   //disabling the submit button because here input feild will not have value
         
         this.checkEmptyField(courses);           // checking white space in input field
+
+        this.maxLengthConstraint(courses);           // checking maximum length in input field
 
     }
 
@@ -172,6 +187,9 @@ class Courses extends Component {
         this.sumbitButtonConstraint(courses);
 
         this.checkEmptyField(courses);           // checking white space in input field
+
+        this.maxLengthConstraint(courses);           // checking maximum length in input field
+
 
     }
 

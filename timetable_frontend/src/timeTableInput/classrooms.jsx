@@ -87,6 +87,17 @@ class ClassRooms extends Component {
         }
     }
 
+
+// handling the maximum length of input field
+    maxLengthConstraint = (rooms) => {
+        rooms.map((room, i) => {
+            if(room.name.length > 12){
+                this.setState({buttonDisabled: true}) 
+                toast.error("Only 12 characters are allowed in room name");    
+            }
+        })
+    }
+
     // handling change in input feild and update in rooms acordingly to show in input feild
     handleChange = (e, i) => {
         const rooms = [...this.state.rooms];
@@ -94,11 +105,15 @@ class ClassRooms extends Component {
         this.setState({rooms})
         
 
+
         this.sumbitButtonCOnstraint(rooms)   //checking that input feild should have value
 
         this.checkUniqueArray(rooms);    //cheking uniquness of input feild
 
         this.checkEmptyField(rooms);    // checking white space sof input fields
+
+        this.maxLengthConstraint(rooms);    // checking maximum length of input speed
+
     }
 
     // this function will add input feild if called
@@ -109,6 +124,8 @@ class ClassRooms extends Component {
         this.sumbitButtonCOnstraint(rooms)  //disabling the submit button because here input feild will not have value
         
         this.checkEmptyField(rooms);    // checking white space sof input fields
+
+        this.maxLengthConstraint(rooms);    // checking maximum length of input speed
     }
 
     // this function will be called when submit button will be clicked
@@ -153,6 +170,8 @@ class ClassRooms extends Component {
         this.sumbitButtonCOnstraint(rooms)
 
         this.checkEmptyField(rooms);    // checking white space sof input fields
+
+        this.maxLengthConstraint(rooms);    // checking maximum length of input speed
     }
 
 

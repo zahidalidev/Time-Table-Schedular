@@ -90,7 +90,15 @@ class Classes extends Component {
         }
     }
 
-
+    // handling the maximum length of input field
+    maxLengthConstraint = (classes) => {
+        classes.map((clas, i) => {
+            if(clas.name.length > 12){
+                this.setState({buttonDisabled: true}) 
+                toast.error("Only 12 characters are allowed in class name");    
+            }
+        })
+    }
     // handling change in input feild and update in classes acordingly to show in input feild
     handleChange = (e, i) => {
         const classes = [...this.state.classes];
@@ -102,6 +110,7 @@ class Classes extends Component {
         this.checkUniqueArray(classes);     //cheking uniquness of input feild
 
         this.checkEmptyField(classes);      // checking white spaces in input fields
+        this.maxLengthConstraint(classes);      // checking maximum length in input fields
     }
 
     // this function will add input feild if called
@@ -112,6 +121,8 @@ class Classes extends Component {
         this.sumbitButtonConstraint(classes);   //disabling the submit button because here input feild will not have value
     
         this.checkEmptyField(classes);      // checking white spaces in input fields
+
+        this.maxLengthConstraint(classes);      // checking maximum length in input fields
     }
 
     // this function will be called when submit button will be clicked
@@ -156,6 +167,8 @@ class Classes extends Component {
         this.sumbitButtonConstraint(classes);
 
         this.checkEmptyField(classes);      // checking white spaces in input fields
+
+        this.maxLengthConstraint(classes);      // checking maximum length in input fields
     }
 
 // handling some styling that can be affected by the resizing of application   ***** start_1 ***** 
