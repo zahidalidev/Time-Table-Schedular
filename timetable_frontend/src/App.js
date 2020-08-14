@@ -10,7 +10,7 @@ import Courses from "./timeTableInput/courses";
 import TimeTable from "./timeTableOutput/tableDesign2";
 import {generateTableWithPost} from "./http/api";
 import Footer2 from "./footer/footer2";
-import PrimarySearchAppBar from "./appBar/appBar";
+
 
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
@@ -96,16 +96,19 @@ class App extends Component {
         {/* toast notification properties */}
         <ToastContainer autoClose={5000} position={toast.POSITION.TOP_RIGHT} /> 
           
-        {/* calling the PrimarySearchAppBar component*/}
-        <Route render = {(props) => < PrimarySearchAppBar {...props} />} />
+        {/* <Route render = {(props) => < PrimarySearchAppBar {...props} />} /> */}
+        
 
         {/* pagination component to track components and progress */}
         <Pagination onProgressValue = {progressValue} />
 
           {/* the componets in the switch will be handled according to path */}
           <Switch>
+            {/* calling the PrimarySearchAppBar component and passing the mehtod reference to call from there*/}
             
-            {/* if url path matches to / then render this component */}
+            
+
+            {/* if url path matches to /home/classrooms then render this component */}
             <Route path = "/" exact render = {(props) => < ClassRooms {...props} onClassRooms = {this.handleClassRooms} />} />
             
             {/* following compnents will be render on the bases of url path and 

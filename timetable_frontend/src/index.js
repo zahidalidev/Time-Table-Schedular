@@ -2,12 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-
+import PrimarySearchAppBar from "./appBar/appBar";
 import * as serviceWorker from './serviceWorker';
 
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 
 // BrowserRouter for routing here
+ReactDOM.render(
+  <BrowserRouter>     
+    <Route render = {(props) => < PrimarySearchAppBar {...props} />} />
+  </BrowserRouter>,
+  document.getElementById('navBAr')
+);
 ReactDOM.render(
   <BrowserRouter>     
     <App />   {/* App component is going to render in div with the id root*/ }
