@@ -133,6 +133,14 @@ class TimeTable extends Component {
       }
     }
 
+
+// Navigate to home to genrate timetable again
+    againGenerateTable = () => {
+      this.props.history.push("/");   //changing url 
+      window.location.reload(true);   //reloading the page .props.history.push("/")
+    }
+
+
 //interface of this component
     render(){ 
         const {onGeneratedTimeTable: timeTables} = this.props; 
@@ -168,9 +176,9 @@ class TimeTable extends Component {
                       <Button style={{backgroundColor: "#2a3547", color: "#d0d6e0", marginTop: 50}} color="primary" onClick={this.generateTable}>Generate Table</Button>
                     </Grid>
                  :   
-                  <Grid container direction="row" justify="center" alignItems="center" item xs={12}>
-                    <p class="homeInstruction" style={{ marginTop: 50, color: "#2a3547"}} ><b><span style={{color: "red"}}>*</span>Goto to Home Page to again generate time table by clicking Home button on App Bar</b></p>
-                  </Grid>
+                    <Grid container direction="row" justify="center" alignItems="center" item xs={12}>
+                      <Button style={{backgroundColor: "#2a3547", color: "#d0d6e0", marginTop: 50}} color="primary" onClick={this.againGenerateTable}>Generate Again</Button>
+                    </Grid>
                 } 
 
                 {/* show popup when image generate button clicked to until image downlaoded*/}

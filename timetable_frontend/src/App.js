@@ -9,7 +9,6 @@ import Teachers from "./timeTableInput/teachers";
 import Courses from "./timeTableInput/courses";
 import TimeTable from "./timeTableOutput/tableDesign2";
 import {generateTableWithPost} from "./http/api";
-import Footer2 from "./footer/footer2";
 
 
 import {ToastContainer, toast} from "react-toastify";
@@ -141,7 +140,6 @@ class App extends Component {
             {/* if didnot match any of above path then redirect that to this path */}
             <Redirect to="/" />
           </Switch>
-        <Footer2 /> {/* footer of the application */}
       </div>
     );
   }
